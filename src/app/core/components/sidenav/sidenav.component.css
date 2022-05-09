@@ -1,0 +1,28 @@
+.primary {
+  background-color: var(--darken-orange);
+}
+
+.photo-button {
+  background-image: url("/assets/img/brand-logo.png");
+  background-size: cover;
+  height: 24vw;
+  width: 24vw;
+  max-height: 125px;
+  max-width: 125px;
+}
+
+/*
+  * estilos para el menu
+  */
+.nav-caption {
+  padding-left: 20px;
+}
+
+mat-nav-list > a.mat-list-item {
+  padding-bottom: 1px !important;
+}
+
+mat-nav-list a:hover,
+mat-nav-list a:active {
+  color: var(--darken-orange);
+}

@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/css/vendor/bootstrap-grid-min.css";
+
+:root {
+  --darken-orange: #ff3400;
+  /* colores a reemplazar */
+  --light-orange: #ff601d;
+  /* colores a reemplazar */
+  --deep-blue: #2d4d69;
+  /* colores a reemplazar */
+  --darken-blue: #314251;
+  /* colores a reemplazar */
+  --light-gray: #b9bfc4;
+  /* colores a reemplazar */
+  --darken-gray: #838787;
+  /* colores a reemplazar */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  max-width: 100vw;
+  font-family: "Roboto", "Open Sans", sans-serif;
+}
+
+mat-card,
+mat-tab-group {
+  max-width: 100vw;
+}
+
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  height: 100vh;
+}
+
+mat-sidenav.gt-sm {
+  width: 50vw;
+}
+
+mat-sidenav.lt-sm {
+  width: 80vw;
+}
+
+app-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+tr.mat-row:hover {
+  background-color: #eee;
+}
