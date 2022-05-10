@@ -1,0 +1,35 @@
+.header-pickanis {
+  background-image: url("../../../assets/img/pickanis-banner.png");
+  background-size: 90% 85%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 90vw;
+  min-height: 45vh;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.icon {
+  align-self: center;
+  width: 120px;
+  height: 110px;
+}
+
+.banner {
+  background-image: url("../../../assets/img/paw-banner.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 100vw;
+  min-height: 40vh;
+}
+
+.perrito {
+  background-image: url("../../../assets/img/perrito.png");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 600px;
+}

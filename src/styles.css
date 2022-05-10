@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./assets/css/vendor/bootstrap-grid-min.css";
+@import "./assets/css/estilos-paginas.css";
 
 :root {
   --darken-orange: #ff3400;
@@ -14,11 +15,6 @@
   /* colores a reemplazar */
   --darken-gray: #838787;
   /* colores a reemplazar */
-}
-
-html,
-body {
-  height: 100%;
 }
 
 body {
