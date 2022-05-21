@@ -10,10 +10,11 @@ export class AppComponent {
   title = 'front-pickanis';
 
   menu: NavItem[] = [
-    { url: '/tipo-citas', name: 'Tipos de Cita', icon: 'next_week' },
-    { url: '/veterinarios', name: 'Veterinarios', icon: 'assignment_ind' },
-    { url: '/responsables', name: 'Clientes y Mascotas', icon: 'people' },
-    { url: '/citas', name: 'Agendar Citas', icon: 'book_online' },
+    { url: '/home', name: 'Menu', icon: 'next_week' },
+    // { url: '/tipo-citas', name: 'Tipos de Cita', icon: 'next_week' },
+    // { url: '/veterinarios', name: 'Veterinarios', icon: 'assignment_ind' },
+    // { url: '/responsables', name: 'Clientes y Mascotas', icon: 'people' },
+    // { url: '/citas', name: 'Agendar Citas', icon: 'book_online' },
   ];
 
   /* TODO: necesito un breakpoint observer? o como vamos a manejar la responsividad de la aplicación en pantallas mas pequeñas */
