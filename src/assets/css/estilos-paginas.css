@@ -15,3 +15,8 @@ h2.h2-verde {
 .rounded {
   border-radius: 50%;
 }
+
+.itallic {
+  font-weight: 200;
+  font-style: italic;
+}

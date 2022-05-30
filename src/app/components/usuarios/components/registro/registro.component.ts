@@ -1,12 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UiService } from '@core/service/ui.service';
 import { TipoDocumento, tiposDocumentos } from '../../shared/model/tipo-documento.model';
 import { UsuarioService } from '../../shared/service/usuario.service';
 
 @Component({
-  selector: 'app-registro',
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
@@ -16,7 +14,7 @@ export class RegistroComponent implements OnInit {
   tiposDoc: TipoDocumento[] = tiposDocumentos;
   seleccionPaseador: boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private uiService: UiService, private service: UsuarioService) {
+  constructor(private uiService: UiService, private service: UsuarioService) {
     this.registroForm = this.iniciarFormGroup();
   }
 
@@ -35,7 +33,6 @@ export class RegistroComponent implements OnInit {
       usuario: new FormControl('', [Validators.required, Validators.maxLength(15)]),
       contrasena: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(14)]),
       matchContrasena: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(14)]),
-      esPaseador: new FormControl(false),
       tiempoExperiencia: new FormControl('', [Validators.maxLength(255)]),
       perfil: new FormControl('', [Validators.maxLength(255)]),
     })

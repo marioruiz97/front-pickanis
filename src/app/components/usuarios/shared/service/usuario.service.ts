@@ -8,4 +8,8 @@ export class UsuarioService {
   registrar(usuario: any) {
     console.log("registro exitoso", usuario)
   }
+
+  iniciarSesion() {
+
+  }
 }

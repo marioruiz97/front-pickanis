@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DIALOG_CONFIG } from '@shared/app.constants';
+import { DIALOG_CONFIG, customConfig } from '@shared/app.constants';
+import { InicioSesionComponent } from '../usuarios/components/inicio-sesion/inicio-sesion.component';
 import { RegistroComponent } from '../usuarios/components/registro/registro.component';
 
 
@@ -16,8 +17,12 @@ export class LandingPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  abrirRegistrarse():void {
-    this.matDialog.open(RegistroComponent, {...DIALOG_CONFIG});
+  abrirRegistrarse(): void {
+    this.matDialog.open(RegistroComponent, { ...DIALOG_CONFIG });
+  }
+
+  abrirInicioSesion(): void {
+    this.matDialog.open(InicioSesionComponent, { ...customConfig('36vw') });
   }
 
 }

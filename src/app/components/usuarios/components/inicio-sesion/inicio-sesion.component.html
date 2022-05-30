@@ -1,0 +1,66 @@
+<div>
+  <h1 mat-dialog-title>Inicia sesion</h1>
+  <div fxFlex></div>
+  <button mat-icon-button [matDialogClose]="true">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<div class="descripcion">
+  <h3 class="mx-auto text-center">Un sistema, miles de paseos</h3>
+  <p class="itallic">
+    Unete a los estudiantes del Poli que intercambian bienes o servicios y durante el proceso brindan bienestar a sus
+    mascotas
+  </p>
+</div>
+<mat-divider class="my-4"></mat-divider>
+
+<form (ngSubmit)="iniciarSesion()" [formGroup]="loginForm" fxLayout="column">
+
+  <div class="mb-4" fxFlex>
+    <label class="form-input">Como deseas iniciar sesion</label>
+    <mat-radio-group (change)="cambiarModo($event)">
+      <mat-radio-button class="form-input" checked [value]="true">Usando el correo electronico </mat-radio-button>
+      <mat-radio-button class="form-input" [value]="false">Usando el nombre de usuario</mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <!-- correo electronico -->
+  <div *ngIf="modoInicio">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Correo Electronico </mat-label>
+      <input type="email" matInput placeholder="Ej. MarioRuiz97@gmail.com" formControlName="correo">
+      <mat-hint>Ingese el correo con que inicia sesión</mat-hint>
+      <mat-error>Ingrese un correo válido</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="!modoInicio">
+    <!-- nombre de usuario o username-->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre de Usuario </mat-label>
+      <input type="text" matInput placeholder="Ej. MarioRuiz97" formControlName="username">
+      <mat-hint>Ingese el nombre de usuario con que inicia sesión</mat-hint>
+      <mat-error>Ingrese un nombre de usuario válido</mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- contraseña -->
+  <mat-form-field appearance="outline">
+    <mat-label>Contraseña</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="contrasena">
+    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+    <mat-hint>Ingrese su contraseña</mat-hint>
+    <mat-error>Contraseña Obligatoria</mat-error>
+  </mat-form-field>
+
+  <mat-dialog-actions>
+    <div fxFlex></div>
+    <button mat-button [matDialogClose]="false">Cancelar</button>
+    <button mat-button type="submit" color="primary" [disabled]="!loginForm.valid">Iniciar Sesion</button>
+  </mat-dialog-actions>
+
+</form>
