@@ -1,0 +1,64 @@
+.header-pickanis {
+  background-image: url("../../../assets/img/pickanis-banner.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 50vh;
+}
+
+.landing-menu {
+  float: right;
+  padding-right: 1.5em;
+  position: relative;
+  top: -1.3em;
+}
+
+.landing-menu button {
+  font-size: 1rem;
+}
+
+.que-es {
+  font-size: 2.5em;
+  color: #126961;
+}
+
+.que-ofrecemos {
+  font-size: 2.5em;
+  color: #f7f7ec;
+}
+
+.rounded {
+  width: 100px;
+  height: 100px;
+  background-color: beige;
+}
+
+h2.servicios {
+  color: beige;
+  font-size: 1.5em;
+}
+
+.banner {
+  background-image: url("../../../assets/img/paw-banner.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-width: 100vw;
+  min-height: 30vh;
+}
+
+.iconos {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  height: 75%;
+  top: 15%;
+  font-size: 70px;
+}
+
+/* ------------------------- */
+.icon {
+  align-self: center;
+  width: 120px;
+  height: 110px;
+}

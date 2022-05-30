@@ -1,5 +1,17 @@
-h2.h2-verde{
-  font-weight: 300;
-  font-size: 1.5rem;
+h2.h2-verde {
+  font-size: 1.5em;
   color: #126961;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.h-50 {
+  min-height: 50vh;
+  height: 50vh;
+}
+
+.rounded {
+  border-radius: 50%;
 }
