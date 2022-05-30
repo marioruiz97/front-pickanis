@@ -1,0 +1,123 @@
+<div>
+  <h1 mat-dialog-title>Registro de usuarios</h1>
+  <div fxFlex></div>
+  <button mat-icon-button [matDialogClose]="true">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
+  <mat-dialog-content fxLayout="column">
+
+    <div class="text-center itallic">
+      Crea tu cuenta y empieza a programar los paseos de tu mascota.
+    </div>
+
+    <!-- Tipo documento y no. documento -->
+    <div fxLayout fxLayout.lt-sm="column">
+      <mat-form-field appearance="outline" class="form-input" fxFlex>
+        <mat-label>Tipo de Documento</mat-label>
+        <mat-select formControlName="tipoDocumento">
+          <mat-option [value]="item.id" *ngFor="let item of tiposDoc">{{item.nombreTipoDocumento}}</mat-option>
+        </mat-select>
+        <mat-hint>Seleccione un tipo de documento</mat-hint>
+        <mat-error>El tipo de documento es obligatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-input" fxFlex>
+        <mat-label>Número de identificación</mat-label>
+        <input matInput type="number" placeholder="Ej. 1017251545" formControlName="identificacion">
+        <mat-hint>Ingrese el número de identificación sin puntos</mat-hint>
+        <mat-error>El número de identificación debe tener entre 6 y 10 caracteres (Actual:
+          {{registroForm.value.identificacion?.length}}) </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Nombre y Apellidos -->
+    <div fxLayout fxLayout.lt-sm="column">
+      <mat-form-field appearance="outline" class="form-input" fxFlex>
+        <mat-label>Nombres</mat-label>
+        <input matInput placeholder="Ej. Mario Andres" formControlName="nombre">
+        <mat-hint>Maximo 80 caracteres; actual:{{registroForm.value.nombre.length}}
+        </mat-hint>
+        <mat-error>El nombre es obligatorio</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-input" fxFlex>
+        <mat-label>Apellidos</mat-label>
+        <input matInput placeholder="Ej. Ruiz Bedoya" formControlName="apellidos">
+        <mat-hint>Maximo 80 caracteres; actual:{{registroForm.value.apellidos.length}}
+        </mat-hint>
+        <mat-error>El apellido es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- telefonos -->
+    <mat-form-field appearance="outline" class="form-input">
+      <mat-label>Teléfono de contacto</mat-label>
+      <input matInput type="tel" placeholder="Ej. 6045022134" formControlName="telefono">
+      <mat-hint>Ingrese un teléfono fijo</mat-hint>
+      <mat-error>Ingrese un teléfono válido de hasta 11 caracteres</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-input">
+      <mat-label>Teléfono celular</mat-label>
+      <input matInput type="tel" placeholder="Ej. 3015465076" formControlName="celular">
+      <mat-hint>Ingrese un teléfono celular</mat-hint>
+      <mat-error>Ingrese un teléfono válido de hasta 11 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- correo electronico -->
+    <mat-form-field appearance="outline" class="form-input">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput type="email" placeholder="Ej. MarioRuiz@gmail.com" formControlName="correo" autocomplete="off">
+      <mat-hint>Ingrese su correo para inicio de sesión y recuperación de contraseña</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form-input">
+      <mat-label>Nombre de usuario</mat-label>
+      <input matInput type="text" placeholder="Ej. MarioRuiz97" formControlName="usuario" autocomplete="off">
+      <mat-hint>Ingrese su nombre de usuario para inicio de sesión</mat-hint>
+    </mat-form-field>
+
+    <!-- contrasenas -->
+    <div fxLayout fxLayout.lt-sm="column">
+      <mat-form-field appearance="outline" class="form-input" fxFlex>
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="contrasena" autocomplete="off">
+        <mat-hint>Ingrese su contraseña (mínimo 6 caracteres)</mat-hint>
+      </mat-form-field>
+      <!-- confirmar contraseña -->
+      <mat-form-field appearance="outline" class="form-input" fxFlex>
+        <mat-label>Confirmar Contraseña</mat-label>
+        <input matInput type="password" (paste)="false" formControlName="matchContrasena" autocomplete="off">
+        <mat-hint>Repita su contraseña</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div class="mt-4" fxFlex>
+      <label class="form-input">Deseas registrarte como paseador?</label>
+      <mat-radio-group (change)="seleccionPaseador = $event.value">
+        <mat-radio-button class="form-input" [value]="true">Si</mat-radio-button>
+        <mat-radio-button class="form-input" checked [value]="false">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div *ngIf="seleccionPaseador" fxLayout="column">
+      <p class="text-center itallic">Si eres paseador, por favor diligencia los siguientes campos</p>
+      <mat-form-field appearance="outline" class="form-input">
+        <mat-label>Tiempo de experiencia paseando perros</mat-label>
+        <input matInput type="number" placeholder="Ej. 360 dias" formControlName="tiempoExperiencia">
+        <mat-hint>Ingrese la experiencia</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="form-input" appearance="outline">
+        <mat-label>Crea tu perfil como paseador</mat-label>
+        <textarea matInput placeholder="Tu perfil, experiencia y descripcion" formControlName="perfil"></textarea>
+        <mat-hint>Usa tu perfil para describirte un poco como paseador</mat-hint>
+      </mat-form-field>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div fxFlex></div>
+    <button mat-button [matDialogClose]="false">Cancelar</button>
+    <button mat-button type="submit" color="accent" [disabled]="!registroForm.valid">Registrarse</button>
+  </mat-dialog-actions>
+</form>

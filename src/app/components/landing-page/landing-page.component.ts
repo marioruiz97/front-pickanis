@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DIALOG_CONFIG } from '@shared/app.constants';
+import { RegistroComponent } from '../usuarios/components/registro/registro.component';
 
 
 @Component({
@@ -8,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  abrirRegistrarse():void {
+    this.matDialog.open(RegistroComponent, {...DIALOG_CONFIG});
   }
 
 }

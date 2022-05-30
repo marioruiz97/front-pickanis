@@ -8,6 +8,7 @@ import { SharedModule } from '@shared/shared.module';
 import { CoreModule } from '@core/core.module';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { UsuariosModule } from './components/usuarios/usuarios.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    UsuariosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
