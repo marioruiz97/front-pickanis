@@ -55,13 +55,13 @@
       <mat-label>Teléfono de contacto</mat-label>
       <input matInput type="tel" placeholder="Ej. 6045022134" formControlName="telefono">
       <mat-hint>Ingrese un teléfono fijo</mat-hint>
-      <mat-error>Ingrese un teléfono válido de hasta 11 caracteres</mat-error>
+      <mat-error>El teléfono debe tener mínimo 10 y máximo 11 caracteres / actual:{{registroForm.value.telefono.length}}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" class="form-input">
       <mat-label>Teléfono celular</mat-label>
       <input matInput type="tel" placeholder="Ej. 3015465076" formControlName="celular">
       <mat-hint>Ingrese un teléfono celular</mat-hint>
-      <mat-error>Ingrese un teléfono válido de hasta 11 caracteres</mat-error>
+      <mat-error>El teléfono debe tener mínimo 10 y máximo 11 caracteres / actual:{{registroForm.value.celular.length}}</mat-error>
     </mat-form-field>
 
     <!-- correo electronico -->

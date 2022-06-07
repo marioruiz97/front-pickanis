@@ -20,6 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -50,6 +51,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatRadioModule,
+    MatTabsModule
   ],
   exports: [
     MatToolbarModule,
@@ -73,6 +75,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatRadioModule,
+    MatTabsModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es' },
