@@ -24,3 +24,7 @@ h2.h2-verde {
 .light-weight {
   font-weight: 200 !important;
 }
+
+app-footer {
+  min-height: 200px;
+}

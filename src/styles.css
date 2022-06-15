@@ -35,7 +35,7 @@ mat-tab-group {
 mat-sidenav-container,
 mat-sidenav-content,
 mat-sidenav {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 mat-sidenav.gt-sm {
