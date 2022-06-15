@@ -1,9 +1,10 @@
 .header-pickanis {
   background-image: url("../../../assets/img/pickanis-banner.png");
-  background-size: 100%;
-  background-position: center;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  min-height: 50vh;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 65vh;
 }
 
 .landing-menu {

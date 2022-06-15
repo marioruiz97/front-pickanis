@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NodoRuta } from '@core/model/nodo-ruta';
 import { TerminoRuta } from '@core/model/termino-ruta';
-import { RUTAS_DICCIONARIO } from './rutas.constants';
+import { RUTAS_DICCIONARIO } from '../../shared/rutas.constants';
 
 
 @Injectable({

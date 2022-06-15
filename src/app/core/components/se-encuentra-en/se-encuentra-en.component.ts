@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NodoRuta } from '@core/model/nodo-ruta';
 import { TerminoRuta } from '@core/model/termino-ruta';
-import { RutasService } from '@shared/rutas.service';
+import { RutasService } from '@core/service/rutas.service';
 
 @Component({
   selector: 'se-encuentra-en',

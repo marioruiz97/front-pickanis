@@ -2,7 +2,22 @@
   background-image: url("../../../assets/img/pickanis-banner.png");
   background-size: 100%;
   background-repeat: no-repeat;
-  width: 100vw;
+  background-attachment: fixed;
+  width: 100%;
+  max-width: 100%;
+  min-height: 50vh;
+}
+
+main {
+  max-width: 100%;
+  background-color: #f7f7f7;
+}
+
+.imagen-titulo-estrategico {
+  background-image: url("../../../assets/img/bernese-mountain-dog.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position-y: center;
   min-height: 600px;
 }
 
@@ -14,16 +29,15 @@
 
 .banner {
   background-image: url("../../../assets/img/paw-banner.png");
-  background-size: 100%;
+  background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
-  min-width: 100vw;
-  min-height: 40vh;
+  width: 100%;
 }
 
 .perrito {
   background-image: url("../../../assets/img/perrito.png");
-  background-size: 80%;
+  background-size: 100% 80%;
   background-position: center;
   background-repeat: no-repeat;
   min-height: 600px;
