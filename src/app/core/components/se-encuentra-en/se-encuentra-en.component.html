@@ -1,0 +1,4 @@
+<span>Se encuentra en: </span>
+<span *ngFor="let ruta of rutas; last as last; trackBy: trackByRutas">
+  <span> </span><a [routerLink]="['/'+ruta.clave]">{{ruta.nombre}}</a><span *ngIf="!last"> > </span>
+</span>

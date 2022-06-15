@@ -5,6 +5,7 @@ import { SharedModule } from '@shared/shared.module';
 import { UsuarioService } from './shared/service/usuario.service';
 import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.component';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
+import { CoreModule } from '@core/core.module';
 
 
 
@@ -16,7 +17,8 @@ import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    CoreModule
   ],
   providers: [
     UsuarioService

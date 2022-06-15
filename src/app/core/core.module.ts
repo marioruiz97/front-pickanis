@@ -5,12 +5,13 @@ import { RouterModule } from '@angular/router';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { SeEncuentraEnComponent } from './components/se-encuentra-en/se-encuentra-en.component';
 
 
 @NgModule({
-  declarations: [SidenavComponent, ToolbarComponent, ConfirmDialogComponent],
+  declarations: [SidenavComponent, ToolbarComponent, ConfirmDialogComponent, SeEncuentraEnComponent],
   imports: [CommonModule, RouterModule, SharedModule],
-  exports: [SidenavComponent, ToolbarComponent],
+  exports: [SidenavComponent, ToolbarComponent, SeEncuentraEnComponent],
   providers: [],
 })
 export class CoreModule { }
