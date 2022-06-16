@@ -57,6 +57,18 @@ h2.servicios {
   font-size: 70px;
 }
 
+section.accion {
+  background-color: #f7f7f7;
+}
+
+.perrito {
+  background-image: url("../../../assets/img/perrito.png");
+  background-size: 100% 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 600px;
+}
+
 /* ----------- Eliminar -------------- */
 .icon {
   align-self: center;

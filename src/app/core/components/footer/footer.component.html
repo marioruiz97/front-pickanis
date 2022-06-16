@@ -1,7 +1,7 @@
 <footer fxLayout fxLayout.lt-sm="column">
   <section fxFlex class="text-center seccion" *ngFor="let seccion of obtenerSecciones()">
     <h3 class="text-bold">{{seccion.titulo}}</h3>
-    <mat-divider class="mx-1"></mat-divider>
+    <mat-divider class="mx-2"></mat-divider>
     <mat-list>
       <mat-list-item *ngFor="let enlace of seccion.enlaces">
         <mat-icon>
