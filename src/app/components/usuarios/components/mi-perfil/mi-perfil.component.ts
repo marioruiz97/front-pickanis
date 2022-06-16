@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UiService } from '@core/service/ui.service';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.css']
 })
-export class MiPerfilComponent implements OnInit {
+export class MiPerfilComponent implements OnInit, OnDestroy {
 
   private currentUser: any;
   private idUsuario = 90;
@@ -30,7 +30,7 @@ export class MiPerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // no debe estar vacío, ignorar alerta mientras
   }
 
   initForm() {
@@ -111,10 +111,10 @@ export class MiPerfilComponent implements OnInit {
   }
 
   onChangePass() {
-    /* this.matDialog.open(ChangePasswordComponent, { data: { idUsuario: this.idUsuario } }); */
+    /* no code this.matDialog.open(ChangePasswordComponent, { data: { idUsuario: this.idUsuario } }); */
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.subs) {
       this.subs.forEach(sub => sub.unsubscribe());
     }

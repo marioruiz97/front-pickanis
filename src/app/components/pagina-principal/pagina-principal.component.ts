@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-pagina-principal',
   templateUrl: './pagina-principal.component.html',
   styleUrls: ['./pagina-principal.component.css']
 })
-export class PaginaPrincipalComponent implements OnInit {
+export class PaginaPrincipalComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    // void constructor. delete if you add logic
   }
 
 }

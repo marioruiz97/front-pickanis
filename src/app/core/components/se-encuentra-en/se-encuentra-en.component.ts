@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NodoRuta } from '@core/model/nodo-ruta';
 import { TerminoRuta } from '@core/model/termino-ruta';
 import { RutasService } from '@core/service/rutas.service';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'se-encuentra-en',
   templateUrl: './se-encuentra-en.component.html',
   styleUrls: ['./se-encuentra-en.component.css']
 })
-export class SeEncuentraEnComponent implements OnInit {
+export class SeEncuentraEnComponent {
 
   private terminoRuta: TerminoRuta;
   rutas: NodoRuta[];
@@ -22,8 +23,5 @@ export class SeEncuentraEnComponent implements OnInit {
 
   trackByRutas(index: number, ruta: NodoRuta): string { return ruta.clave; }
 
-  ngOnInit(): void {
-    // TODO: eliminar si es necesario
-  }
 
 }

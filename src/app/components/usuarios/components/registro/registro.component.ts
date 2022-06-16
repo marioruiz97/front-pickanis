@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UiService } from '@core/service/ui.service';
 import { TipoDocumento, tiposDocumentos } from '../../shared/model/tipo-documento.model';
@@ -8,7 +8,7 @@ import { UsuarioService } from '../../shared/service/usuario.service';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent implements OnInit {
+export class RegistroComponent {
 
   registroForm: FormGroup;
   tiposDoc: TipoDocumento[] = tiposDocumentos;
@@ -18,10 +18,17 @@ export class RegistroComponent implements OnInit {
     this.registroForm = this.iniciarFormGroup();
   }
 
-  ngOnInit(): void {
+  registrarUsuario() {
+    // validar si password y confirm son iguales
+    const coinciden = this.validarContrasenas(this.registroForm.value.contrasena, this.registroForm.value.matchContrasena);
+    if (!coinciden) {
+      return;
+    }
+    const form = this.registroForm.value;
+    this.service.registrar(form);
   }
 
-  iniciarFormGroup(): FormGroup {
+  private iniciarFormGroup(): FormGroup {
     return new FormGroup({
       tipoDocumento: new FormControl('', [Validators.required]),
       identificacion: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.minLength(6)]),
@@ -38,17 +45,7 @@ export class RegistroComponent implements OnInit {
     })
   }
 
-  registrarUsuario() {
-    // validar si password y confirm son iguales
-    const coinciden = this.validarContrasenas(this.registroForm.value.contrasena, this.registroForm.value.matchContrasena);
-    if (!coinciden) {
-      return;
-    }
-    const form = this.registroForm.value;
-    this.service.registrar(form);
-  }
-
-  validarContrasenas(password: string, confirm: string): boolean {
+  private validarContrasenas(password: string, confirm: string): boolean {
     const coinciden = password === confirm ? true : false;
     if (!coinciden) {
       this.uiService.mostrarSnackBar('Las contraseñas no coinciden', 'Ok');

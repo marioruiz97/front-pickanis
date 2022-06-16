@@ -26,7 +26,7 @@
   </div>
 
   <!-- correo electronico -->
-  <div *ngIf="modoInicio">
+  <div *ngIf="iniciarConCorreo">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Correo Electronico </mat-label>
       <input type="email" matInput placeholder="Ej. MarioRuiz97@gmail.com" formControlName="correo">
@@ -35,7 +35,7 @@
     </mat-form-field>
   </div>
 
-  <div *ngIf="!modoInicio">
+  <div *ngIf="!iniciarConCorreo">
     <!-- nombre de usuario o username-->
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Nombre de Usuario </mat-label>
