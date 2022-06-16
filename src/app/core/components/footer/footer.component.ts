@@ -3,11 +3,16 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookF, faInstagram, faTwitter, faWhatsapp, IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { fa0, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
+export interface Seccion {
+  titulo: string;
+  enlaces: EnlaceExterno[];
+}
+
 export interface EnlaceExterno {
   faIcon: IconProp;
   nombre: string;
   caption?: string;
-  url: string
+  url: string;
 }
 
 @Component({
@@ -29,5 +34,13 @@ export class FooterComponent {
   ]
 
   constructor() { }
+
+  obtenerSecciones(): Seccion[] {
+    return [
+      { titulo: "Redes", enlaces: this.redes },
+      { titulo: "Recursos", enlaces: this.redes },
+      { titulo: "Contáctenos", enlaces: this.contactos },
+    ]
+  }
 
 }

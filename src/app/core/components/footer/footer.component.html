@@ -1,18 +1,21 @@
 <footer fxLayout fxLayout.lt-sm="column">
-  <section fxFlex class="text-center seccion">
-    <h3 class="text-bold">Redes</h3>
+  <section fxFlex class="text-center seccion" *ngFor="let seccion of obtenerSecciones()">
+    <h3 class="text-bold">{{seccion.titulo}}</h3>
     <mat-divider class="mx-1"></mat-divider>
-    <mat-list class="no-style">
-      <mat-list-item *ngFor="let enlace of redes">
-        <mat-icon class="my-auto">
+    <mat-list>
+      <mat-list-item *ngFor="let enlace of seccion.enlaces">
+        <mat-icon>
           <fa-icon [icon]="enlace.faIcon" fxFlex></fa-icon>
         </mat-icon>
-        <a [href]="enlace.url" class="enlace-externo" target="_blank">
+        <a [href]="enlace.url" target="_blank" class="enlace-externo" [ngClass]="enlace.caption ?' pl-3':'' ">
           <span mat-line>{{enlace.nombre}}</span>
+          <span mat-line *ngIf="enlace.caption">{{enlace.caption}}</span>
         </a>
       </mat-list-item>
     </mat-list>
   </section>
+
+  <!--
   <section fxFlex class="text-center seccion">
     <h3 class="text-bold">Recursos</h3>
     <mat-divider class="mx-1"></mat-divider>
@@ -23,22 +26,7 @@
       <mat-list-item>Paseadores</mat-list-item>
     </mat-list>
   </section>
-  <section fxFlex class="text-center seccion">
-    <h3 class="text-bold">Contáctenos</h3>
-    <mat-divider class="mx-1"></mat-divider>
-    <mat-list>
-      <mat-list-item *ngFor="let contacto of contactos">
-        <mat-icon>
-          <fa-icon [icon]="contacto.faIcon" fxFlex></fa-icon>
-        </mat-icon>
-        <a class="enlace-externo pl-3" [href]="contacto.url" target="_blank">
-          <span mat-line>{{contacto.nombre}}</span>
-          <span mat-line> {{contacto.caption}} </span>
-        </a>
-
-      </mat-list-item>
-    </mat-list>
-  </section>
+ -->
 
 </footer>
 <mat-divider></mat-divider>
