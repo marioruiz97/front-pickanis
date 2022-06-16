@@ -21,6 +21,10 @@ h2.h2-verde {
   font-style: italic !important;
 }
 
+.text-bold {
+  font-weight: bold !important;
+}
+
 .light-weight {
   font-weight: 200 !important;
 }

@@ -5,6 +5,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [],
@@ -16,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LayoutModule,
     FlexLayoutModule,
     MaterialModule,
+    FontAwesomeModule,
     // NgxMaterialTimepickerModule
   ],
   exports: [
@@ -26,6 +28,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     LayoutModule,
     FlexLayoutModule,
     MaterialModule,
+    FontAwesomeModule,
     // NgxMaterialTimepickerModule
   ],
 })

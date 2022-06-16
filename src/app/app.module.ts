@@ -9,6 +9,7 @@ import { CoreModule } from '@core/core.module';
 import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-principal.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { UsuariosModule } from './components/usuarios/usuarios.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UsuariosModule } from './components/usuarios/usuarios.module';
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
-    UsuariosModule
+    UsuariosModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
