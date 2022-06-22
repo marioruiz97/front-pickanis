@@ -1,0 +1,14 @@
+div.foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: aqua;
+}
+
+.text-red {
+  color: #f44336;
+}
+
+.mat-list-base .mat-list-item .mat-list-icon, .size-2 {
+  font-size: 2.4em !important;
+}

@@ -1,85 +1,167 @@
-<se-encuentra-en></se-encuentra-en>
+<mat-toolbar class="mb-4">
+  <mat-toolbar-row>
+    <h2>Mi Cuenta</h2>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <se-encuentra-en></se-encuentra-en>
+  </mat-toolbar-row>
+</mat-toolbar>
 
-<section class="mt-5 pt-3" gdArea="profile" fxLayoutAlign="center">
-    <mat-card class="p-3 p-sm-4 mat-elevation-z5" fxFlex fxFlex.gt-sm="80">
-      <mat-card-header class="mt-3" fxLayoutAlign="center">
-        <mat-card-title>Información Personal</mat-card-title>
+
+
+<section fxLayout fxLayout.lt-sm="column">
+  <mat-card class="mat-elevation-z5 m-2" fxFlex>
+    <mat-card-header>
+      <mat-card-title>Datos personales </mat-card-title>
+      <span fxFlex></span>
+      <button mat-button color="primary" matTooltip="Editar información personal" (click)="toggleEdit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <form autocomplete="off" class="p-2" [formGroup]="accountForm" (ngSubmit)="saveMyInfo()" fxLayout="column">
+        <div class="foto my-2"></div>
+        <mat-form-field appearance="standard">
+          <mat-label>Tipo Documento</mat-label>
+          <input matInput type="text" formControlName="tipoDocumento">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">article</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>N° de Identificación</mat-label>
+          <input matInput type="text" formControlName="identificacion">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">credit_card</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Nombres</mat-label>
+          <input matInput type="text" formControlName="nombre">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">face</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Apellidos</mat-label>
+          <input matInput type="text" formControlName="apellido1">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">face</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Nombre de Usuario</mat-label>
+          <input matInput type="text" formControlName="username">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">badge</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Correo</mat-label>
+          <input matInput type="email" formControlName="correo">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">mail</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Telefono Móvil</mat-label>
+          <input matInput type="number" formControlName="telefono">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">phonelink_ring</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Telefono Fijo</mat-label>
+          <input matInput type="number" formControlName="telefono">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">fax</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Direccion</mat-label>
+          <input matInput type="text" formControlName="direccion">
+          <mat-icon matPrefix class="mat-18" [inline]="enableFields">home</mat-icon>
+        </mat-form-field>
+
+        <p class="caption itallic text-center my-3 text-red" *ngIf="enableFields && !accountForm.valid">
+          Verifica los campos del formulario
+        </p>
+
+        <div *ngIf="enableFields" fxLayoutAlign.gt-sm="end">
+          <button type="button" mat-raised-button color="warn" (click)="toggleEdit()"> Cancelar </button>
+          <button type="submit" mat-raised-button color="primary" class="ml-5" [disabled]="!accountForm.valid">
+            Guardar cambios
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <aside fxFlex aria-label="opciones" fxLayout="column">
+    <mat-card class="mat-elevation-z5 m-2">
+      <mat-card-header>
+        <mat-card-title>Contactos</mat-card-title>
       </mat-card-header>
-      <mat-card-content fxLayout.gt-sm="row">
-        <aside fxLayout="column" fxLayoutGap="1em" fxLayoutAlign="center center">
-          <button mat-fab type="button" class="options mat-elevation-z5"></button>
-          <div fxLayout.lt-sm="column" fxLayoutGap="20px">
-            <button mat-raised-button class="px-3 py-1" fxFlexOrder.lt-sm="2" fxFlex color="primary"
-              (click)="toggleEdit()">
-              Editar Perfil
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon>account_circle</mat-icon>
+            <span mat-line>Pepito</span>
+            <span mat-line>+57 301 540 9087</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon mat-list-icon>account_circle</mat-icon>
+            <span mat-line>Fulanito</span>
+            <span mat-line>+57 301 540 9086</span>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-icon-button color="primary">
+              <mat-icon class="size-2">add_circle</mat-icon>
+              <span class="pl-3">Agregar contacto</span>
             </button>
-            <button mat-raised-button class="px-3 py-1" fxFlexOrder.lt-sm="1" fxFlex color="warn"
-              (click)="onChangePass()">
-              Cambiar Contraseña
-            </button>
-          </div>
-        </aside>
-
-        <form autocomplete="off" class="p-4" [formGroup]="accountForm" (ngSubmit)="saveMyInfo()" fxLayout="column">
-          <mat-form-field appearance="standard">
-            <mat-label>Tipo Documento</mat-label>
-            <input matInput type="text" formControlName="tipoDocumento">
-            <mat-icon matPrefix class="mat-18">credit_card</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>N° de Identificación</mat-label>
-            <input matInput type="text" formControlName="identificacion">
-            <mat-icon matPrefix class="mat-18">verified_user</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>Nombre</mat-label>
-            <input matInput type="text" formControlName="nombre">
-            <mat-icon matPrefix class="mat-18">face</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>Primer Apellido</mat-label>
-            <input matInput type="text" formControlName="apellido1">
-            <mat-icon matPrefix class="mat-18">face</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>Segundo Apellido</mat-label>
-            <input matInput type="text" formControlName="apellido2">
-            <mat-icon matPrefix class="mat-18">face</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>Correo</mat-label>
-            <input matInput type="email" formControlName="correo">
-            <mat-icon matPrefix class="mat-18">email</mat-icon>
-          </mat-form-field>
-
-          <mat-form-field appearance="standard">
-            <mat-label>Telefono</mat-label>
-            <input matInput type="number" formControlName="telefono">
-            <mat-icon matPrefix class="mat-18">phonelink_ring</mat-icon>
-          </mat-form-field>
-
-          <div *ngIf="enableFields">
-            <button type="button" mat-raised-button color="warn" (click)="toggleEdit()"> Cancelar </button>
-            <button type="submit" mat-raised-button color="primary" class="ml-5" [disabled]="!accountForm.valid">
-              Guardar cambios
-            </button>
-          </div>
-        </form>
+          </mat-list-item>
+        </mat-list>
       </mat-card-content>
     </mat-card>
-  </section>
+    <mat-card class="mat-elevation-z5 m-2">
+      <mat-card-header>
+        <mat-card-title>Opciones</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <button mat-button [routerLink]="['/home']">
+              <mat-icon>dashboard</mat-icon>
+              <span class="pl-2">Ir a mi tablero</span>
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button (click)="verificarCuenta()">
+              <mat-icon>verified_user</mat-icon>
+              <span class="pl-2">Verificar cuenta</span>
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button (click)="onChangePass()" color="warn">
+              <mat-icon>lock_reset</mat-icon>
+              <span class="pl-2">Cambiar contraseña</span>
+            </button>
+          </mat-list-item>
+          <mat-list-item>
+            <button mat-button (click)="eliminarCuenta()" color="warn">
+              <mat-icon>person_remove</mat-icon>
+              <span class="pl-2">Eliminar cuenta</span>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </aside>
+</section>
+
+<section fxLayout fxLayout.lt-sm="column">
+
+</section>
 
 
-  <mat-tab-group mat-stretch-tabs class="mat-elevation-z4">
-    <mat-tab label="Mis proyectos">
-      <!-- <app-mis-proyectos *ngIf="_idUsuario" [idUsuario]="_idUsuario"></app-mis-proyectos> -->
-    </mat-tab>
-    <mat-tab label="Mis clientes">
-      <!-- <app-mis-clientes *ngIf="_idUsuario" [idUsuario]="_idUsuario"></app-mis-clientes> -->
-    </mat-tab>
-  </mat-tab-group>
+<mat-tab-group mat-stretch-tabs class="mat-elevation-z4">
+  <mat-tab label="Notificaciones">
+    <!-- <app-mis-proyectos *ngIf="_idUsuario" [idUsuario]="_idUsuario"></app-mis-proyectos> -->
+  </mat-tab>
+  <mat-tab label="Últimas actividades">
+    <!-- <app-mis-clientes *ngIf="_idUsuario" [idUsuario]="_idUsuario"></app-mis-clientes> -->
+  </mat-tab>
+</mat-tab-group>

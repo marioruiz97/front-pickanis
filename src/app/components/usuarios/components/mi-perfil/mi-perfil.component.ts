@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '@core/components/confirm-dialog/confirm-dialog.component';
 import { UiService } from '@core/service/ui.service';
+import { DIALOG_CONFIG } from '@shared/app.constants';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -37,8 +39,9 @@ export class MiPerfilComponent implements OnInit, OnDestroy {
     return new FormGroup({
       nombre: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(40)]),
       apellido1: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(30)]),
-      apellido2: new FormControl({ value: '', disabled: true }, [Validators.maxLength(30)]),
+      direccion: new FormControl({ value: '', disabled: true }, [Validators.maxLength(30)]),
       telefono: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(12)]),
+      username: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(64)]),
       correo: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email, Validators.maxLength(64)]),
       identificacion: new FormControl({ value: '', disabled: true }),
       tipoDocumento: new FormControl({ value: '', disabled: true })
@@ -50,7 +53,7 @@ export class MiPerfilComponent implements OnInit, OnDestroy {
     this.accountForm.setValue({
       nombre: usuario.nombre,
       apellido1: usuario.apellido1,
-      apellido2: usuario.apellido2,
+      direccion: usuario.direccion,
       telefono: usuario.telefono,
       correo: usuario.correo,
       identificacion: usuario.identificacion,
@@ -71,12 +74,12 @@ export class MiPerfilComponent implements OnInit, OnDestroy {
   }
 
   enableControls() {
-    const controls = ['nombre', 'apellido1', 'apellido2', 'telefono', 'correo'];
+    const controls = ['nombre', 'apellido1', 'direccion', 'telefono', 'correo'];
     controls.forEach(control => this.accountForm.controls[control].enable());
   }
 
   disableControls() {
-    const controls = ['nombre', 'apellido1', 'apellido2', 'telefono', 'correo'];
+    const controls = ['nombre', 'apellido1', 'direccion', 'telefono', 'correo'];
     controls.forEach(control => this.accountForm.controls[control].disable());
   }
 
@@ -102,7 +105,7 @@ export class MiPerfilComponent implements OnInit, OnDestroy {
       idUsuario: this.idUsuario,
       nombre: form.nombre,
       apellido1: form.apellido1,
-      apellido2: form.apellido2,
+      direccion: form.direccion,
       telefono: form.telefono,
       correo: form.correo
     };
@@ -112,6 +115,20 @@ export class MiPerfilComponent implements OnInit, OnDestroy {
 
   onChangePass() {
     /* no code this.matDialog.open(ChangePasswordComponent, { data: { idUsuario: this.idUsuario } }); */
+  }
+
+  verificarCuenta() {
+    alert('se enviará un correo electrónico para verificar la cuenta')
+  }
+
+  eliminarCuenta() {
+    const data = {
+      title: "Eliminar la cuenta",
+      message: `¿Estás seguro de eliminar tu cuenta? <br/> <span class='caption itallic'>Esto no se puede deshacer</span>`,
+      errors: [],
+      confirm: "Sí, deseo eliminar la cuenta",
+    }
+    this.matDialog.open(ConfirmDialogComponent, { ...DIALOG_CONFIG, data });
   }
 
   ngOnDestroy(): void {

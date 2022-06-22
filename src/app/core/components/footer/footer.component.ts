@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faFacebookF, faInstagram, faTwitter, faWhatsapp, IconDefinition } from '@fortawesome/free-brands-svg-icons';
-import { fa0, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookF, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 export interface Seccion {
   titulo: string;
