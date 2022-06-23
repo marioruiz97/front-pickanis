@@ -1,24 +1,23 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@core/components/confirm-dialog/confirm-dialog.component';
 import { UiService } from '@core/service/ui.service';
 import { DIALOG_CONFIG } from '@shared/app.constants';
-import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.css']
 })
-export class MiPerfilComponent implements OnInit, OnDestroy {
+export class MiPerfilComponent implements OnInit {
 
   private currentUser: any;
   private idUsuario = 90;
-  private subs: Subscription[] = [];
   private cuentaService: any
   accountForm: FormGroup;
-  enableFields = false;
+  habilitarCampos = false;
 
   constructor(
     private uiService: UiService,
@@ -65,8 +64,8 @@ export class MiPerfilComponent implements OnInit, OnDestroy {
  metodo usado para activar formulario de edición y para aparecer los botonoes de guardar y cancelar
  */
   toggleEdit() {
-    this.enableFields = !this.enableFields;
-    if (this.enableFields) {
+    this.habilitarCampos = !this.habilitarCampos;
+    if (this.habilitarCampos) {
       this.enableControls();
     } else {
       this.disableControls();
@@ -131,11 +130,6 @@ export class MiPerfilComponent implements OnInit, OnDestroy {
     this.matDialog.open(ConfirmDialogComponent, { ...DIALOG_CONFIG, data });
   }
 
-  ngOnDestroy(): void {
-    if (this.subs) {
-      this.subs.forEach(sub => sub.unsubscribe());
-    }
-  }
 
 
 }

@@ -75,3 +75,9 @@ section.accion {
   width: 120px;
   height: 110px;
 }
+
+.display-1 {
+  font: 200 22px/28px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 64px;
+}

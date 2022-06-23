@@ -24,62 +24,62 @@
         <mat-form-field appearance="standard">
           <mat-label>Tipo Documento</mat-label>
           <input matInput type="text" formControlName="tipoDocumento">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">article</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">article</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>N° de Identificación</mat-label>
           <input matInput type="text" formControlName="identificacion">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">credit_card</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">credit_card</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Nombres</mat-label>
           <input matInput type="text" formControlName="nombre">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">face</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">face</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Apellidos</mat-label>
           <input matInput type="text" formControlName="apellido1">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">face</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">face</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Nombre de Usuario</mat-label>
           <input matInput type="text" formControlName="username">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">badge</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">badge</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Correo</mat-label>
           <input matInput type="email" formControlName="correo">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">mail</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">mail</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Telefono Móvil</mat-label>
           <input matInput type="number" formControlName="telefono">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">phonelink_ring</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">phonelink_ring</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Telefono Fijo</mat-label>
           <input matInput type="number" formControlName="telefono">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">fax</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">fax</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Direccion</mat-label>
           <input matInput type="text" formControlName="direccion">
-          <mat-icon matPrefix class="mat-18" [inline]="enableFields">home</mat-icon>
+          <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">home</mat-icon>
         </mat-form-field>
 
-        <p class="caption itallic text-center my-3 text-red" *ngIf="enableFields && !accountForm.valid">
+        <p class="caption itallic text-center my-3 text-red" *ngIf="habilitarCampos && !accountForm.valid">
           Verifica los campos del formulario
         </p>
 
-        <div *ngIf="enableFields" fxLayoutAlign.gt-sm="end">
+        <div *ngIf="habilitarCampos" fxLayoutAlign.gt-sm="end">
           <button type="button" mat-raised-button color="warn" (click)="toggleEdit()"> Cancelar </button>
           <button type="submit" mat-raised-button color="primary" class="ml-5" [disabled]="!accountForm.valid">
             Guardar cambios
