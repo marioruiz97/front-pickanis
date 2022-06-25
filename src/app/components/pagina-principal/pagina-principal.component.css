@@ -12,6 +12,16 @@ main {
   max-width: 100%;
   background-color: #f7f7f7;
 }
+.mat-display-1, .mat-typography .mat-display-1 {
+  font: 400 25px/25px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  margin: 0 0 64px;
+}
+.mat-display-3, .mat-typography .mat-display-3 {
+  font: 400 45px/40px Roboto,"Helvetica Neue", sans-serif;
+  letter-spacing: -0.02em;
+  margin: 0 0 64px;
+}
 
 .imagen-titulo-estrategico {
   background-image: url("../../../assets/img/bernese-mountain-dog.jpg");
