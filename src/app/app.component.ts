@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavItem } from '@core/model/nav-item';
+import { map, Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +10,24 @@ import { NavItem } from '@core/model/nav-item';
 })
 export class AppComponent {
   title = 'front-pickanis';
+  $isHandset: Observable<boolean>;
 
   menu: NavItem[] = [
-    { url: '/home', name: 'Menu', icon: 'next_week' },
-    // { url: '/tipo-citas', name: 'Tipos de Cita', icon: 'next_week' },
-    // { url: '/veterinarios', name: 'Veterinarios', icon: 'assignment_ind' },
-    // { url: '/responsables', name: 'Clientes y Mascotas', icon: 'people' },
-    // { url: '/citas', name: 'Agendar Citas', icon: 'book_online' },
+    { url: '/paseadores', name: 'Paseadores', icon: 'hiking' },
+    { url: '/paseos', name: 'Paseos', icon: 'explore' },
+    { url: '/dashboard', name: 'Mi tablero', icon: 'dashboard' },
+    { url: '/mascotas', name: 'Mis mascotas', icon: 'pets' },
   ];
 
-  /* TODO: necesito un breakpoint observer? o como vamos a manejar la responsividad de la aplicación en pantallas mas pequeñas */
+  constructor(
+    private breakPointObserver: BreakpointObserver,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
+    this.$isHandset = this.breakPointObserver.observe([Breakpoints.Handset])
+      .pipe(
+        map(result => result.matches),
+        tap(() => this.changeDetectorRef.detectChanges())
+      );
+  }
+
 }

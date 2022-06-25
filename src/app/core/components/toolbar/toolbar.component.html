@@ -1,18 +1,35 @@
 <mat-toolbar class=".bg-darken-gray expanded">
-    <div fxHide.gt-sm>
-        <button mat-icon-button (click)="openMenu.emit()">
-            <mat-icon>menu</mat-icon>
+  <div fxHide.gt-sm>
+    <button mat-icon-button (click)="openMenu.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+  <div fxFlex fxLayoutAlign.lt-md="center" fxLayoutAlign.gt-sm="space-between">
+    <div class="logo" [routerLink]="['/home']"></div>
+
+    <mat-nav-list fxLayout="row" fxHide.lt-md>
+      <mat-list-item *ngFor="let item of menu" [routerLink]="[item.url]">
+        <mat-icon class="pr-2">{{item.icon}}</mat-icon>
+        <a> {{item.name}} </a>
+      </mat-list-item>
+
+      <button mat-button [matMenuTriggerFor]="settingsMenu" matTooltip="Ajustes">
+        <mat-icon>settings</mat-icon>
+      </button>
+      <mat-menu #settingsMenu="matMenu">
+        <button mat-menu-item *ngFor="let setting of ajustes" [routerLink]="[setting.url]">
+          <mat-icon>{{setting.icon}}</mat-icon> {{setting.name}}
         </button>
-    </div>
-
-    <div fxFlex fxLayoutAlign.lt-md="center" fxLayoutAlign.gt-sm="space-between">
-        <div class="logo" [routerLink]="['/home']"></div>
-
-        <mat-nav-list fxLayout="row" fxHide.lt-md>
-            <mat-list-item *ngFor="let item of menu" [routerLink]="[item.url]">
-                <mat-icon class="pr-2">{{item.icon}}</mat-icon>
-                <a> {{item.name}} </a>
-            </mat-list-item>
-        </mat-nav-list>
-    </div>
+        <a class="link-manual-usuario"
+          href="https://firebasestorage.googleapis.com/v0/b/proyectos-asisge.appspot.com/o/Manual%20de%20usuario%20Asisge.pdf?alt=media&token=18fd2fc7-d375-4aaf-98b5-787855a5ef84"
+          target="_blank" mat-menu-item>
+          <mat-icon>import_contacts</mat-icon> Manual de Usuario
+        </a>
+        <button mat-menu-item (click)="cerrarSesion()">
+          <mat-icon>exit_to_app</mat-icon> Cerrar Sesión
+        </button>
+      </mat-menu>
+    </mat-nav-list>
+  </div>
 </mat-toolbar>

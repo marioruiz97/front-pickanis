@@ -3,6 +3,7 @@
 @import "./assets/css/estilos-paginas.css";
 
 :root {
+  --root-green: #126961;
   --darken-orange: #ff3400;
   /* colores a reemplazar */
   --light-orange: #ff601d;

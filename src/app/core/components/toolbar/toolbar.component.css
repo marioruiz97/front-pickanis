@@ -1,5 +1,5 @@
 .expanded {
-  color: var(--light-orange);
+  color: var(--root-green);
 }
 
 .logo {
@@ -15,9 +15,9 @@
   */
 mat-list-item mat-icon,
 mat-list-item a {
-  color: var(--light-orange);
+  color: var(--root-green);
   font-weight: 200;
-  
+
 }
 
 mat-list-item a {
@@ -27,5 +27,5 @@ mat-list-item a {
 
 mat-list-item:hover,
 mat-list-item:active {
-  border-bottom: 3px solid var(--darken-orange);
+  border-bottom: 3px solid var(--root-green);
 }

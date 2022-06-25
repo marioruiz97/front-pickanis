@@ -1,6 +1,5 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation" mode="push">
-    <!-- [ngClass]="($isHandset) ? 'lt-sm' : 'gt-sm'" -->
+  <mat-sidenav #sidenav role="navigation" mode="push" [ngClass]="($isHandset) ? 'lt-sm' : 'gt-sm'">
     <app-sidenav (closeSidenav)="sidenav.close()" [menu]="menu"></app-sidenav>
   </mat-sidenav>
 

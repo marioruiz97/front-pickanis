@@ -11,12 +11,17 @@ export class SidenavComponent {
 
   @Input()
   menu!: NavItem[];
+  nombre: string;
 
   constructor() {
-    // void constructor
+    this.nombre = 'Mario Ruiz' //TODO: agregar logica del nombre del usuario
   }
 
   onToggle(): void {
     this.closeSidenav.emit();
+  }
+
+  cerrarSesion() {
+    console.log('cerrar sesion')
   }
 }
