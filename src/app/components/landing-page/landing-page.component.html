@@ -1,4 +1,4 @@
-<header class="header-pickanis mb-3">
+<header class="header-pickanis">
   <div class="landing-menu">
     <button class="mx-2 py-1 px-3" mat-raised-button color="accent" (click)="abrirRegistrarse()">Registrarse</button>
     <button class="mx-2 py-1 px-3" mat-raised-button color="primary" (click)="abrirInicioSesion()">Iniciar
@@ -6,23 +6,22 @@
   </div>
 </header>
 
-<div fxLayout="coulmn">
-  <mat-card class="mat-elevation-z1 mx-auto my-5 h-50 py-4" fxFlex.gt-sm="50" fxLayout="column" fxLayoutAlign="center">
-    <h2 class="que-es text-center mb-5">¿Qué es pickanis?</h2>
-
-    <p class="display-1 light-weight">Somos una empresa interesados en el bienestar de las mascotas,
+<div fxLayout.lt-sm="coulmn">
+  <div class="mr-3 que-es-imagen" fxFlex></div>
+  <div class="text-center py-1" fxFlex fxFlex.gt-sm="62">
+    <h2 class="que-es pt-5 mb-4">¿Qué es pickanis?</h2>
+    <p class="display-1 light-weight px-3">Somos una empresa interesados en el bienestar de las mascotas,
       deseamos que cada una de estas pequeñas almas tenga la oportunidad de explorar todos los días,
-       conocer lugares, y tener una rutina el cual también le ayuda a su salud.
-       Pero también deseamos que sus dueños estén tranquilos de quien los pasea, y que puedan tener
-       su rutina a pesar de que sea complicado para ellos sacarlos.
+      conocer lugares, y tener una rutina el cual también le ayuda a su salud.
+      Pero también deseamos que sus dueños estén tranquilos de quien los pasea, y que puedan tener
+      su rutina a pesar de que sea complicado para ellos sacarlos.
     </p>
-    <p class="display-1 light-weight">Nos identificamos porque no cumplimos con un medio de pago fijo,
-       quiere decir que todo proceso de pago se debe de realizar entre el paseador y el dueño, ya sea de
-       manera monetaria o por trueque.
+    <p class="display-1 light-weight px-3">Nos identificamos porque no cumplimos con un medio de pago fijo,
+      quiere decir que todo proceso de pago se debe de realizar entre el paseador y el dueño, ya sea de
+      manera monetaria o por trueque.
       Así podemos compartir conocimientos y apoyarnos de diferentes maneras sin tener la necesidad de gastar.
-
     </p>
-  </mat-card>
+  </div>
 </div>
 
 <section class="banner pt-3">

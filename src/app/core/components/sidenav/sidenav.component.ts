@@ -8,9 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SidenavComponent {
   @Output() closeSidenav = new EventEmitter();
-
-  @Input()
-  menu!: NavItem[];
+  @Input() menu!: NavItem[];
   nombre: string;
 
   constructor() {

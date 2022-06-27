@@ -1,19 +1,21 @@
 <footer fxLayout fxLayout.lt-sm="column">
-  <section fxFlex class="text-center seccion" *ngFor="let seccion of obtenerSecciones()">
-    <h3 class="text-bold">{{seccion.titulo}}</h3>
-    <mat-divider class="mx-2"></mat-divider>
-    <mat-list>
-      <mat-list-item *ngFor="let enlace of seccion.enlaces">
-        <mat-icon>
-          <fa-icon [icon]="enlace.faIcon" fxFlex></fa-icon>
-        </mat-icon>
-        <a [href]="enlace.url" target="_blank" class="enlace-externo" [ngClass]="enlace.caption ?' pl-3':'' ">
-          <span mat-line>{{enlace.nombre}}</span>
-          <span mat-line *ngIf="enlace.caption">{{enlace.caption}}</span>
-        </a>
-      </mat-list-item>
-    </mat-list>
-  </section>
+  <ng-container *ngFor="let seccion of obtenerSecciones(); trackBy:trackByTitulo">
+    <section fxFlex class="text-center seccion" *ngIf="debeMostrarse(seccion.requiereLogin)">
+      <h3 class="text-bold">{{seccion.titulo}}</h3>
+      <mat-divider class="mx-2"></mat-divider>
+      <mat-list>
+        <mat-list-item *ngFor="let enlace of seccion.enlaces">
+          <mat-icon>
+            <fa-icon [icon]="enlace.faIcon" fxFlex></fa-icon>
+          </mat-icon>
+          <a [href]="enlace.url" target="_blank" class="enlace-externo" [ngClass]="enlace.caption ?' pl-3':'' ">
+            <span mat-line>{{enlace.nombre}}</span>
+            <span mat-line *ngIf="enlace.caption">{{enlace.caption}}</span>
+          </a>
+        </mat-list-item>
+      </mat-list>
+    </section>
+  </ng-container>
 
   <!-- TODO: eliminar despues de agregar programaticamente los recursos y validar el auth guard
   <section fxFlex class="text-center seccion">

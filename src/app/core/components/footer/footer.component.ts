@@ -6,6 +6,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 export interface Seccion {
   titulo: string;
   enlaces: EnlaceExterno[];
+  requiereLogin: boolean;
 }
 
 export interface EnlaceExterno {
@@ -22,6 +23,8 @@ export interface EnlaceExterno {
 })
 export class FooterComponent {
 
+  private estaLogueado: boolean;
+
   redes: EnlaceExterno[] = [
     { nombre: "Facebook", faIcon: faFacebookF, url: "https://facebook.com" },
     { nombre: "Twitter", faIcon: faTwitter, url: "https://twitter.com" },
@@ -33,14 +36,24 @@ export class FooterComponent {
     { nombre: "Envía un correo", faIcon: faEnvelope, caption: "marioarb97@gmail.com", url: "mailto:marioarb97@gmail.com" },
   ]
 
-  constructor() { }
+  constructor() {
+    this.estaLogueado = true; // TODO: agregar logica para obtener resultado del auth service
+  }
+
 
   obtenerSecciones(): Seccion[] {
     return [
-      { titulo: "Redes", enlaces: this.redes },
-      { titulo: "Recursos", enlaces: this.redes },
-      { titulo: "Contáctenos", enlaces: this.contactos },
+      { titulo: "Redes", enlaces: this.redes, requiereLogin: false },
+      { titulo: "Recursos", enlaces: this.redes, requiereLogin: true },
+      { titulo: "Contáctenos", enlaces: this.contactos, requiereLogin: false },
     ]
   }
+
+  trackByTitulo(index: number, seccion: Seccion): string { return seccion.titulo; }
+
+  debeMostrarse(requiereLogin: boolean): boolean {
+    return ((this.estaLogueado) || (!this.estaLogueado && !requiereLogin));
+  }
+
 
 }

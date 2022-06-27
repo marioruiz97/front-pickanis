@@ -23,6 +23,13 @@
   color: #126961;
 }
 
+.que-es-imagen{
+  background-image: url("../../../assets/img/que-es-imagen.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
 .que-ofrecemos {
   font-size: 2.5em;
   color: #f7f7ec;
@@ -77,7 +84,7 @@ section.accion {
 }
 
 .display-1 {
-  font: 200 22px/28px Roboto, "Helvetica Neue", sans-serif;
+  font: 200 31px/37px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: normal;
-  margin: 0 0 64px;
+  margin: 0 0 44px;
 }
