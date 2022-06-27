@@ -8,7 +8,7 @@
       "@core/*": ["src/app/core/*"],
       "@core-service/*": ["src/app/core/service/*"],
       "@shared/*": ["src/app/shared/*"],
-      "@feature/*": ["src/app/feature/*"]
+      "@feature/*": ["src/app/components/*"]
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],

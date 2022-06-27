@@ -1,5 +1,7 @@
-<span class="mat-caption my-2">Se encuentra en: </span>
-<span *ngFor="let ruta of rutas; last as last; trackBy: trackByRutas">
-  <a [ngClass]="last ? 'activo enlace-ruta' : 'enlace-ruta'" [routerLink]="['/'+ruta.clave]">{{ruta.nombre}}</a>
-  <span *ngIf="!last"> > </span>
-</span>
+<div class="my-2 pl-3">
+  <span class="mat-caption">Se encuentra en: </span>
+  <span *ngFor="let ruta of rutas; last as last; trackBy: trackByRutas">
+    <a [ngClass]="last ? 'activo enlace-ruta' : 'enlace-ruta'" [routerLink]="['/'+ruta.clave]">{{ruta.nombre}}</a>
+    <span *ngIf="!last"> > </span>
+  </span>
+</div>

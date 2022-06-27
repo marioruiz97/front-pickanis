@@ -7,6 +7,7 @@ export const RUTA_DASHBOARD: string = "dashboard";
 export const RUTA_NOTIFICACIONES: string = "notificaciones";
 export const RUTA_PASEOS: string = "paseos";
 export const RUTA_PASEADORES: string = "paseadores";
+export const RUTA_MASCOTAS: string = "mascotas";
 
 
 export const RUTAS_DICCIONARIO: TerminoRuta[] = [

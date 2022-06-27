@@ -10,6 +10,7 @@ import { PaginaPrincipalComponent } from './components/pagina-principal/pagina-p
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { UsuariosModule } from './components/usuarios/usuarios.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MascotaModule } from './components/mascota/mascota.module';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    FontAwesomeModule,
     CoreModule,
     UsuariosModule,
-    FontAwesomeModule
+    MascotaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

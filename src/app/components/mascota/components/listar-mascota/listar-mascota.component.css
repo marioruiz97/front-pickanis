@@ -1,0 +1,9 @@
+h3.pet-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+mat-form-field.buscar {
+  min-width: 65vw;
+}
