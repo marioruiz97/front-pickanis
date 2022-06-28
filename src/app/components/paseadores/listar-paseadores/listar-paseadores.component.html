@@ -1,0 +1,23 @@
+<h1 class="mat-display-1 text-center">Paseadores</h1>
+<se-encuentra-en></se-encuentra-en>
+
+<mat-card class="container mat-elevation-z4 mb-3 mx-4" *ngFor="let paseador of paseadores">
+  <div class="mr-3" fxFlex="13">
+    <div class="avatar rounded text-center mx-auto" fxLayout="column" fxLayoutAlign="center">
+      <h3 class="my-auto">MR</h3>
+    </div>
+  </div>
+  <div class="info-personal" fxFlex="60">
+    <h3 class="mat-display-1 mb-3">{{paseador.nombre}}</h3>
+    <h3 class="mat-h2">Perfil:</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam commodi, et, est nesciunt assumenda velit
+      quisquam
+      eos suscipit praesentium porro laboriosam distinctio ipsum amet odit similique quam. Vero, illo iste?
+    </p>
+  </div>
+  <div class="experiencia" fxFlex>
+    <h3 class="mat-h2">Experiencia</h3>
+    <p>3años y 6meses paseando perros</p>
+  </div>
+</mat-card>

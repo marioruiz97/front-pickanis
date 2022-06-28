@@ -11,6 +11,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { UsuariosModule } from './components/usuarios/usuarios.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MascotaModule } from './components/mascota/mascota.module';
+import { PaseadoresModule } from './components/paseadores/paseadores.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MascotaModule } from './components/mascota/mascota.module';
     FontAwesomeModule,
     CoreModule,
     UsuariosModule,
-    MascotaModule
+    MascotaModule,
+    PaseadoresModule
   ],
   providers: [],
   bootstrap: [AppComponent]

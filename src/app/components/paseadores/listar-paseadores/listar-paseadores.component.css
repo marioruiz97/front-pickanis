@@ -1,0 +1,13 @@
+.container {
+  margin-top: 2em;
+}
+
+h3 {
+  color: #126961;
+}
+
+.avatar {
+  background-color: #0000b9;
+  height: 8vw;
+  width: 8vw;
+}

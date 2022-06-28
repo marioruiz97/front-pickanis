@@ -10,7 +10,7 @@ export class ToolbarComponent {
   @Input()
   menu!: NavItem[];
   ajustes: NavItem[] = [
-    { name: 'Mi Perfil', url: '/cuenta', icon: 'account_circle' },
+    { name: 'Mi cuenta', url: '/cuenta', icon: 'account_circle' },
     { name: 'Acerca de', url: '/acerca', icon: 'account_tree' },
     { name: 'Contacto', url: '/contacto', icon: 'contacts' }
   ];
