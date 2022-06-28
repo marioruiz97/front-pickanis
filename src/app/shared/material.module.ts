@@ -24,6 +24,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     MatRadioModule,
     MatTabsModule
   ],
@@ -74,6 +77,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     MatRadioModule,
     MatTabsModule
   ],

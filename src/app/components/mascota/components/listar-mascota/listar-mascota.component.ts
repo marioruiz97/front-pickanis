@@ -1,9 +1,7 @@
 import { MatDialog } from '@angular/material/dialog';
 import { MascotaService } from './../../shared/service/mascota.service';
 import { Mascota } from './../../shared/model/mascota';
-import {
-  AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
