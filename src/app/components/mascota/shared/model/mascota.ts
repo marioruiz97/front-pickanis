@@ -3,6 +3,9 @@ export interface Mascota {
   nombre: string;
   fechaNacimiento: Date;
   peso: number;
-  rasgosCaracteristicos: string;
-  idResponsableMascota: number;
+  raza:string;
+  observaciones: string;
+  dueno: number;
+  sexo: 'M' | 'F';
+  foto?: string; //TODO: implementar foto
 }

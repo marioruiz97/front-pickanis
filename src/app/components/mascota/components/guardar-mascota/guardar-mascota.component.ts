@@ -4,6 +4,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Mascota } from '@feature/mascota/shared/model/mascota';
+import { sexosMascota, SexoMascota } from '@feature/mascota/shared/model/sexo-mascota';
 
 @Component({
   templateUrl: './guardar-mascota.component.html',
@@ -14,8 +15,9 @@ export class GuardarMascotaComponent implements OnInit {
   mascotaForm!: FormGroup;
   maxDate = new Date();
   isWaiting = false;
+  sexos: SexoMascota[] = sexosMascota;
   private isUpdate = false;
-  private idResponsable!: number;
+  private dueno!: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Mascota,
@@ -42,9 +44,11 @@ export class GuardarMascotaComponent implements OnInit {
     this.mascotaForm = new FormGroup({
       idMascota: new FormControl({ value: '', disabled: true }),
       nombre: new FormControl('', [Validators.required]),
+      raza: new FormControl('', [Validators.required]),
+      sexo: new FormControl('', [Validators.required]),
       fechaNacimiento: new FormControl('', [Validators.required]),
-      peso: new FormControl(0, [Validators.required, Validators.min(0.2)]),
-      rasgosCaracteristicos: new FormControl('', [Validators.maxLength(255)]),
+      peso: new FormControl('', [Validators.required, Validators.min(0.2)]),
+      observaciones: new FormControl('', [Validators.maxLength(255)]),
     });
     this.mascotaForm.markAsTouched();
   }
@@ -54,17 +58,19 @@ export class GuardarMascotaComponent implements OnInit {
     this.mascotaForm.setValue({
       idMascota: mascota.idMascota,
       nombre: mascota.nombre,
+      raza: mascota.raza,
+      sexo: mascota.sexo,
       fechaNacimiento: mascota.fechaNacimiento,
       peso: mascota.peso,
-      rasgosCaracteristicos: mascota.rasgosCaracteristicos,
+      observaciones: mascota.observaciones,
     });
   }
 
   onSubmit(): void {
     if (this.isUpdate) {
-      this.service.modificar({ ...this.mascotaForm.value, idResponsableMascota: this.idResponsable }, this.data.idMascota);
+      this.service.modificar({ ...this.mascotaForm.value, dueno: this.dueno }, this.data.idMascota);
     } else {
-      this.service.crear({ ...this.mascotaForm.value, idResponsableMascota: this.idResponsable });
+      this.service.crear({ ...this.mascotaForm.value, dueno: this.dueno });
     }
     this.dialogRef.close();
   }

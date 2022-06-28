@@ -4,6 +4,10 @@ h3.pet-title {
   font-weight: 400;
 }
 
+.container {
+  min-height: 65vh;
+}
+
 mat-form-field.buscar {
   min-width: 65vw;
 }

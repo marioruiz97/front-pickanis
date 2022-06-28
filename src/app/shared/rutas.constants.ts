@@ -39,6 +39,18 @@ export const RUTAS_DICCIONARIO: TerminoRuta[] = [
       }
     }
   },
+  {
+    termino: RUTA_MASCOTAS, definicion: {
+      clave: RUTA_HOME, nombre: "Menú principal", siguiente:
+      {
+        clave: RUTA_CUENTA, nombre: "Mi cuenta", siguiente:
+        {
+          clave: RUTA_DASHBOARD, nombre: "Tablero", siguiente:
+            { clave: RUTA_MASCOTAS, nombre: "Mis Mascotas" }
+        }
+      }
+    }
+  },
   { termino: RUTA_PASEOS, definicion: { clave: RUTA_HOME, nombre: "Menú principal" } },
   { termino: RUTA_PASEADORES, definicion: { clave: RUTA_HOME, nombre: "Menú principal" } },
 ]

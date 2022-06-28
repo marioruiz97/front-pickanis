@@ -1,7 +1,7 @@
 import { MatDialog } from '@angular/material/dialog';
 import { MascotaService } from './../../shared/service/mascota.service';
 import { Mascota } from './../../shared/model/mascota';
-import { AfterViewInit, Component, EventEmitter, OnDestroy, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -15,20 +15,17 @@ import { DIALOG_CONFIG } from '@shared/app.constants';
   styleUrls: ['./listar-mascota.component.css'],
 })
 export class ListarMascotaComponent implements AfterViewInit, OnDestroy {
-  displayedColumns = ['idMascota', 'nombre', 'fechaNacimiento', 'peso', 'rasgosCaracteristicos', 'acciones'];
+  displayedColumns = ['nombre', 'raza', 'sexo', 'fechaNacimiento', 'peso', 'observaciones', 'acciones'];
   datasource = new MatTableDataSource<Mascota>();
-  mostrarLista = false;
   private suscripciones: Subscription[] = [];
 
   @ViewChild(MatSort, { static: false }) sort!: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  @Output() ocultarLista = new EventEmitter();
-
-  constructor(private service: MascotaService, private matDialog: MatDialog) { }
-
-  ocultar(): void {
-    this.ocultarLista.emit();
+  constructor(private service: MascotaService, private matDialog: MatDialog) {
+    this.datasource.data.push({
+      idMascota: 1, dueno: 1, fechaNacimiento: new Date(), nombre: "nala", observaciones: "loca", peso: 34, raza: "golden retriever", sexo: "F"
+    })
   }
 
   ngAfterViewInit(): void {
