@@ -9,12 +9,13 @@
       <h2 class="mat-display-3">¿Por qué es bueno pasear con tu perro a diario?</h2>
       <span class="mat-display-1 light-weight">
         No pasear a los caninos puede perjudicar directamente su salud física, mental y la convivencia
-         ya sea en sus hogares o hasta con otros caninos, por el cual se generan consecuencias negativas
-         notables ya sea a corto, mediano o largo plazo
+        ya sea en sus hogares o hasta con otros caninos, por el cual se generan consecuencias negativas
+        notables ya sea a corto, mediano o largo plazo
       </span><br><br><br>
       <span class="mat-display-1 light-weight">
         Los paseos diarios son una magnífica oportunidad para disfrutar de un tiempo de calidad.
-        Este rato es extremadamente importante para el desarrollo del comportamiento de tu perro, ayuda con el control del peso,
+        Este rato es extremadamente importante para el desarrollo del comportamiento de tu perro, ayuda con el control
+        del peso,
         mejora la socialización y por ultimo y menos importante mejora la salud física y mental.
       </span>
     </div>
@@ -22,19 +23,12 @@
 
   <!-- TODO: esto se puede hacer de forma programática, teniendo en el component la lista de rutas y servicios -->
   <section class="my-5 banner" fxLayout="column">
-    <h2 class="mat-display-2 mt-3 light-weight text-center">Accesos frecuentes</h2>
-    <div>
-      <mat-card class="mat-elevation-z5 text-center mx-2 my-2" fxFlex fxLayout="column">
-        <img src="../../../assets/img/productos.png" alt="Productos" class="icon">
-        <h2 class="pt-3 h2-verde">Productos</h2>
-      </mat-card>
-      <mat-card class="mat-elevation-z5 text-center mx-2 my-2" fxFlex fxLayout="column">
-        <img src="../../../assets/img/rutas.png" alt="Productos" class="icon">
-        <h2 class="pt-3 h2-verde">Diseño de rutas</h2>
-      </mat-card>
-      <mat-card class="mat-elevation-z5 text-center mx-2 my-2" fxFlex fxLayout="column">
-        <img src="../../../assets/img/servicios.png" alt="Productos" class="icon">
-        <h2 class="pt-3 h2-verde">Seguimiento de servicio</h2>
+    <h2 class="mat-display-2 mt-3 light-weight text-center">Accesos rápidos</h2>
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly" class="accesos">
+      <mat-card class="mat-elevation-z8 text-center m-2 mb-4" *ngFor="let acceso of accesos; trackBy: trackByTitulo"
+        fxFlex.lt-sm="47" fxFlex.sm="30" fxFlex.gt-sm="25" (click)="test(acceso.url)">
+        <mat-icon class="icon">{{acceso.icono}}</mat-icon>
+        <h2 class="pt-3 h2-verde">{{acceso.nombre}}</h2>
       </mat-card>
     </div>
     <span class="mat-display-1 itallic text-center mt-4 mb-3">Ingresa a una de las opciones!</span>
@@ -48,8 +42,8 @@
         muchos no cuentan con la capacidad económica de adquirir ya sea asesoría personalizada, clases privadas,
         o simplemente desean tener un ingreso o alguna ayuda, esto se puede llegar a lograr mediante el intercambio
         de servicios, una práctica conocida como trueque que es práctica desde el imperio romano y no necesariamente
-         requiere un intercambio de dinero.
-        </span>
+        requiere un intercambio de dinero.
+      </span>
     </div>
     <div class="perrito m-1" fxFlex> </div>
   </section>

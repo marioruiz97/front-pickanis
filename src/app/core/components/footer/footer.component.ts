@@ -1,20 +1,8 @@
 import { Component } from '@angular/core';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { EnlaceExterno, Seccion } from '@core/model/enlace';
 import { faFacebookF, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-export interface Seccion {
-  titulo: string;
-  enlaces: EnlaceExterno[];
-  requiereLogin: boolean;
-}
-
-export interface EnlaceExterno {
-  faIcon: IconProp;
-  nombre: string;
-  caption?: string;
-  url: string;
-}
 
 @Component({
   selector: 'app-footer',

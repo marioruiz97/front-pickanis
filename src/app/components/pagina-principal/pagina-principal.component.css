@@ -12,13 +12,17 @@ main {
   max-width: 100%;
   background-color: #f7f7f7;
 }
-.mat-display-1, .mat-typography .mat-display-1 {
+
+.mat-display-1,
+.mat-typography .mat-display-1 {
   font: 400 25px/25px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: normal;
   margin: 0 0 64px;
 }
-.mat-display-3, .mat-typography .mat-display-3 {
-  font: 400 45px/40px Roboto,"Helvetica Neue", sans-serif;
+
+.mat-display-3,
+.mat-typography .mat-display-3 {
+  font: 400 45px/40px Roboto, "Helvetica Neue", sans-serif;
   letter-spacing: -0.02em;
   margin: 0 0 64px;
 }
@@ -32,9 +36,10 @@ main {
 }
 
 .icon {
-  align-self: center;
-  width: 120px;
-  height: 110px;
+  display: inline-block;
+  width: 100%;
+  font-size: 80px;
+  color: #07463f;
 }
 
 .banner {
@@ -43,6 +48,10 @@ main {
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
+}
+
+.accesos mat-card:hover {
+  cursor: pointer;
 }
 
 .perrito {
