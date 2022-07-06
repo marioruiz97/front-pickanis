@@ -9,11 +9,11 @@ import { Paseador } from '../shared/model/paseador';
 export class ListarPaseadoresComponent {
 
   paseadores: Paseador[] = [
-    {nombre:'Mario Ruiz'},
-    {nombre:'Mario Ruiz'},
-    {nombre:'Mario Ruiz'},
-    {nombre:'Mario Ruiz'},
-    {nombre:'Mario Ruiz'},
+    { nombre: 'Fulanito Perez' },
+    { nombre: 'Fulanito Sultano' },
+    { nombre: 'Fulanito de tal' },
+    { nombre: 'Fulanito 4' },
+    { nombre: 'Fulanito 5' },
   ]
   constructor() { }
 

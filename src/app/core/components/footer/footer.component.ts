@@ -20,8 +20,8 @@ export class FooterComponent {
   ]
 
   contactos: EnlaceExterno[] = [
-    { nombre: "Whatsapp", faIcon: faWhatsapp, caption: "+57 3015465076", url: "https://api.whatsapp.com/send?phone=573015465076" },
-    { nombre: "Envía un correo", faIcon: faEnvelope, caption: "marioarb97@gmail.com", url: "mailto:marioarb97@gmail.com" },
+    { nombre: "Whatsapp", faIcon: faWhatsapp, caption: "+57 3017777777", url: "https://api.whatsapp.com/send?phone=573015465076" },
+    { nombre: "Envía un correo", faIcon: faEnvelope, caption: "marioarb@gmail.com", url: "mailto:marioarb@gmail.com" },
   ]
 
   constructor() {
