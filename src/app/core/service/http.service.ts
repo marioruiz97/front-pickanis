@@ -13,13 +13,13 @@ export class HttpService {
 
   constructor(protected httpClient: HttpClient) { }
 
-  public createDefaultOptions(): Options {
+  private createDefaultOptions(): Options {
     return {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
   }
 
-  postRequest<T, R>(path: string, data: T) {
+  postRequest<T, R>(path: string, data: T): Observable<R> {
     return this.httpClient.post<R>(
       `${this.API_ENDPOINT}/${path}`,
       data,
@@ -27,7 +27,7 @@ export class HttpService {
     );
   }
 
-  putRequest<T, R>(path: string, data: T) {
+  putRequest<T, R>(path: string, data: T): Observable<R> {
     return this.httpClient.put<R>(
       `${this.API_ENDPOINT}/${path}`,
       data,
