@@ -25,13 +25,13 @@ export class RegistroComponent {
       return;
     }
     const form = this.registroForm.value;
-    this.service.registrar(form);
+    this.service.registrar(form, this.seleccionPaseador);
   }
 
   private iniciarFormGroup(): FormGroup {
     return new FormGroup({
       tipoDocumento: new FormControl('', [Validators.required]),
-      identificacion: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.minLength(6)]),
+      identificacion: new FormControl('', [Validators.required, Validators.min(1), Validators.maxLength(10), Validators.minLength(6)]),
       nombre: new FormControl('', [Validators.required, Validators.maxLength(80)]),
       apellidos: new FormControl('', [Validators.required, Validators.maxLength(70)]),
       telefono: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(11), Validators.pattern('(^$|[0-9]*)')]),

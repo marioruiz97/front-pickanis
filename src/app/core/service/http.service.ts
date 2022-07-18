@@ -1,7 +1,8 @@
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
+import { AuthData } from '@feature/usuarios/shared/model/auth-data.model';
 
 export interface Options {
   headers?: HttpHeaders;
@@ -11,12 +12,25 @@ export interface Options {
 export class HttpService {
   private API_ENDPOINT = environment.endpoint;
 
+  private loginHeaders = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded', Authorization: environment.authorization
+  });
+
   constructor(protected httpClient: HttpClient) { }
 
   private createDefaultOptions(): Options {
     return {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
+  }
+
+  loginRequest(authData: AuthData): Promise<any> {
+    const loginPath = environment.token_path;
+    const params = new URLSearchParams();
+    params.set('grant_type', environment.grant_type);
+    params.set('username', authData.login);
+    params.set('password', authData.contrasena);
+    return lastValueFrom(this.httpClient.post(`${this.API_ENDPOINT}/${loginPath}`, params.toString(), { headers: this.loginHeaders }));
   }
 
   postRequest<T, R>(path: string, data: T): Observable<R> {

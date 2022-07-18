@@ -36,7 +36,12 @@ export class InicioSesionComponent {
       return;
     }
     console.log('inicio sesion ')
-    this.service.iniciarSesion();
+    let login: string;
+    if (this.iniciarConCorreo)
+      login = this.loginForm.value.correo;
+    else
+      login = this.loginForm.value.username
+    this.service.iniciarSesion({ login, contrasena: this.loginForm.value.contrasena });
   }
 
   private iniciarFormGroup() {
@@ -49,7 +54,7 @@ export class InicioSesionComponent {
 
   private validarModoInicio(): boolean {
     let esValido = false;
-    if (this.iniciarConCorreo && this.loginForm.value.correo && this.loginForm.value.correo.contains('@')) esValido = true;
+    if (this.iniciarConCorreo && this.loginForm.value.correo && this.loginForm.value.correo.includes('@')) esValido = true;
     if (!this.iniciarConCorreo && this.loginForm.value.username && this.loginForm.value.username.length >= 6) esValido = true;
     return esValido;
   }

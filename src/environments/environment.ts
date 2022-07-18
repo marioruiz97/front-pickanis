@@ -4,7 +4,10 @@
 
 export const environment = {
   endpoint: 'http://localhost:8080/api/v1',
-  production: false
+  production: false,
+  authorization: 'Basic ' + btoa('front-pickanis:12345'),
+  token_path: 'oauth/token',
+  grant_type: 'password',
 };
 
 /*
