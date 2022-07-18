@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EnlaceExterno, Seccion } from '@core/model/enlace';
+import { AutenticacionService } from '@core/service/autenticacion.service';
 import { faFacebookF, faInstagram, faTwitter, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +12,7 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 })
 export class FooterComponent {
 
-  private estaLogueado: boolean;
+  private estaLogueado: boolean = false;
 
   redes: EnlaceExterno[] = [
     { nombre: "Facebook", faIcon: faFacebookF, url: "https://facebook.com" },
@@ -24,15 +25,16 @@ export class FooterComponent {
     { nombre: "Envía un correo", faIcon: faEnvelope, caption: "marioarb@gmail.com", url: "mailto:marioarb@gmail.com" },
   ]
 
-  constructor() {
-    this.estaLogueado = true; // TODO: agregar logica para obtener resultado del auth service
+  constructor(private authService: AutenticacionService) {
+    this.authService.estaAutenticado.subscribe(estado => { this.estaLogueado = estado });
+    this.authService.verificarAutenticacion();
   }
 
 
   obtenerSecciones(): Seccion[] {
     return [
       { titulo: "Redes", enlaces: this.redes, requiereLogin: false },
-      { titulo: "Recursos", enlaces: this.redes, requiereLogin: true },
+      { titulo: "Recursos", enlaces: this.redes, requiereLogin: true }, // TODO: cambiar por recursos dentro del sistema
       { titulo: "Contáctenos", enlaces: this.contactos, requiereLogin: false },
     ]
   }

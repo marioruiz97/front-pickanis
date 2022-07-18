@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { UiService } from '@core/service/ui.service';
 import { TipoDocumento, tiposDocumentos } from '../../shared/model/tipo-documento.model';
 import { UsuarioService } from '../../shared/service/usuario.service';
@@ -14,7 +15,7 @@ export class RegistroComponent {
   tiposDoc: TipoDocumento[] = tiposDocumentos;
   seleccionPaseador: boolean = false;
 
-  constructor(private uiService: UiService, private service: UsuarioService) {
+  constructor(private uiService: UiService, private service: UsuarioService, private dialogLoginRef: MatDialogRef<RegistroComponent>) {
     this.registroForm = this.iniciarFormGroup();
   }
 
@@ -25,7 +26,7 @@ export class RegistroComponent {
       return;
     }
     const form = this.registroForm.value;
-    this.service.registrar(form, this.seleccionPaseador);
+    this.service.registrar(form, this.seleccionPaseador, this.dialogLoginRef);
   }
 
   private iniciarFormGroup(): FormGroup {

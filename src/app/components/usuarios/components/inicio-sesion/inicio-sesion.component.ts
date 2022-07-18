@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatRadioChange } from '@angular/material/radio';
 import { UiService } from '@core/service/ui.service';
 import { UsuarioService } from '../../shared/service/usuario.service';
@@ -14,7 +15,7 @@ export class InicioSesionComponent {
   iniciarConCorreo: boolean = true;
   hide: boolean = true;
 
-  constructor(private uiService: UiService, private service: UsuarioService) {
+  constructor(private uiService: UiService, private service: UsuarioService, private dialogLoginRef: MatDialogRef<InicioSesionComponent>) {
     this.loginForm = this.iniciarFormGroup();
   }
 
@@ -35,13 +36,12 @@ export class InicioSesionComponent {
       this.uiService.mostrarSnackBar('No ingreso nombre de usuario o correo', 'Ok');
       return;
     }
-    console.log('inicio sesion ')
     let login: string;
     if (this.iniciarConCorreo)
       login = this.loginForm.value.correo;
     else
       login = this.loginForm.value.username
-    this.service.iniciarSesion({ login, contrasena: this.loginForm.value.contrasena });
+    this.service.iniciarSesion({ login, contrasena: this.loginForm.value.contrasena }, this.dialogLoginRef);
   }
 
   private iniciarFormGroup() {

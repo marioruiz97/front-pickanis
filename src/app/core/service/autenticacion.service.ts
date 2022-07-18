@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthData } from '@feature/usuarios/shared/model/auth-data.model';
+import { TokenInfo } from '@core/model/token-info.model';
 import * as rutas from '@shared/rutas.constants';
+import { Subject } from 'rxjs';
 import { UiService } from './ui.service';
 
 @Injectable({
@@ -9,16 +10,30 @@ import { UiService } from './ui.service';
 })
 export class AutenticacionService {
 
-  usuarioEnSesion: AuthData | null = null;
-  token: string | null = "";
+  usuarioEnSesion: TokenInfo | null = null;
+  token: string | null = null;
+  estaAutenticado: Subject<boolean> = new Subject<boolean>();
 
   constructor(private router: Router, private uiService: UiService) { }
 
-  estaAutenticado(): boolean {
-    return true; // TODO : implementar
+  verificarAutenticacion(): boolean {
+    let payload = this.obtenerDatosToken(this.buscarToken);
+    if (payload != null) {
+      this.guardarDatosUsuario(payload);
+      this.estaAutenticado.next(true);
+      return true;
+    }
+    this.estaAutenticado.next(false);
+    return false;
   }
 
-  irAlLogin() {
+  obtenerNombreUsuario(): string {
+    if (this.usuarioEnSesion)
+      return this.usuarioEnSesion.nombreCompleto;
+    return "";
+  }
+
+  private irAlLogin() {
     this.router.navigate([rutas.RUTA_LANDING]);
   }
 
@@ -29,6 +44,7 @@ export class AutenticacionService {
   sesionExpirada(): void {
     this.uiService.mostrarError({ title: 'La sesión ha expirado!', message: 'Ingresa al sistema nuevamente', confirm: 'Ok' });
     this.cerrarSesion();
+    this.estaAutenticado.next(false);
   }
 
 
@@ -38,6 +54,7 @@ export class AutenticacionService {
     this.usuarioEnSesion = null;
     sessionStorage.clear();
     this.irAlLogin();
+    this.estaAutenticado.next(false);
   }
 
 
@@ -47,6 +64,7 @@ export class AutenticacionService {
     this.guardarDatosUsuario(payload);
     this.guardarToken(token);
     this.irAlHome();
+    this.estaAutenticado.next(true);
   }
 
   inicioSesionFallo(error: any): void {
@@ -62,6 +80,13 @@ export class AutenticacionService {
     this.uiService.mostrarError({ title: "Ha fallado el inicio de sesión", message: "Por favor verifique los datos ingresados", errors })
   }
 
+  private get buscarToken(): any {
+    let token = null;
+    if (this.token) token = this.token;
+    else if (!this.token && sessionStorage.getItem('token') != null) token = sessionStorage.getItem('token');
+    return token;
+  }
+
   private obtenerDatosToken(accessToken: any) {
     if (accessToken != null) {
       return JSON.parse(atob(accessToken.split(".")[1]));
@@ -75,8 +100,7 @@ export class AutenticacionService {
   }
 
   private guardarDatosUsuario(payload: any) {
-    console.log(payload)
-    this.usuarioEnSesion = { identificacion: payload.usuario_id, login: payload.usuario_correo, contrasena: "" }
+    this.usuarioEnSesion = { identificacion: payload.usuario_id, correo: payload.usuario_correo, username: payload.usuario_username, roles: payload.usuario_roles, nombreCompleto: payload.usuario_nombre }
   }
 
 }

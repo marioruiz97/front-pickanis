@@ -1,18 +1,24 @@
 import { NavItem } from '@core/model/nav-item';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AutenticacionService } from '@core/service/autenticacion.service';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css'],
 })
-export class SidenavComponent {
+export class SidenavComponent implements OnInit {
   @Output() closeSidenav = new EventEmitter();
   @Input() menu!: NavItem[];
-  nombre: string;
+  nombre: string = "";
 
-  constructor() {
-    this.nombre = 'Mario Ruiz' //TODO: agregar logica del nombre del usuario
+  constructor(private authService: AutenticacionService) { }
+
+  ngOnInit(): void {
+    this.authService.estaAutenticado.subscribe(cambio => {
+      if (cambio) this.nombre = this.authService.obtenerNombreUsuario();
+    });
+    this.authService.verificarAutenticacion();
   }
 
   onToggle(): void {
@@ -20,6 +26,7 @@ export class SidenavComponent {
   }
 
   cerrarSesion() {
-    console.log('cerrar sesion')
+    this.authService.cerrarSesion();
+    this.onToggle();
   }
 }

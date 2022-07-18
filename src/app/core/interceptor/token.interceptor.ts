@@ -22,7 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError(err => {
-        if (err.status === 401 && this.authService.estaAutenticado()) {
+        if (err.status === 401 && this.authService.verificarAutenticacion()) {
           this.authService.sesionExpirada();
         }
         if (err.status === 403) {
