@@ -1,0 +1,13 @@
+mat-form-field {
+  margin-bottom: 1rem;
+}
+
+.form-actions button {
+  min-width: 40%;
+  margin-bottom: 1em;
+}
+
+mat-dialog-content {
+  min-height: 50vh;
+  max-height: 80vh;
+}
