@@ -8,7 +8,8 @@
           <mat-icon>
             <fa-icon [icon]="enlace.faIcon" fxFlex></fa-icon>
           </mat-icon>
-          <a [href]="enlace.url" target="_blank" class="enlace-externo" [ngClass]="enlace.caption ?' pl-3':'' ">
+          <a [href]="enlace.url" [target]="enlace.target" class="enlace-externo"
+            [ngClass]="enlace.caption ?' pl-3':'' ">
             <span mat-line>{{enlace.nombre}}</span>
             <span mat-line *ngIf="enlace.caption">{{enlace.caption}}</span>
           </a>
@@ -17,18 +18,6 @@
     </section>
   </ng-container>
 
-  <!-- TODO: eliminar despues de agregar programaticamente los recursos y validar el auth guard
-  <section fxFlex class="text-center seccion">
-    <h3 class="text-bold">Recursos</h3>
-    <mat-divider class="mx-1"></mat-divider>
-    <mat-list class="no-style">
-      <mat-list-item>Equipo de trabajo</mat-list-item>
-      <mat-list-item>Acerca de</mat-list-item>
-      <mat-list-item>Paseos</mat-list-item>
-      <mat-list-item>Paseadores</mat-list-item>
-    </mat-list>
-  </section>
- -->
 
 </footer>
 <mat-divider></mat-divider>

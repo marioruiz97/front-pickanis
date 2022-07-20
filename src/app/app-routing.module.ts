@@ -9,7 +9,7 @@ import { MiPerfilComponent } from './components/usuarios/components/mi-perfil/mi
 import * as rutas from './shared/rutas.constants'
 
 const routes: Routes = [
-  { path: '', redirectTo: `/${rutas.RUTA_HOME}`, pathMatch: 'full' }, // TODO: redirigir a landing si no ha iniciado sesion, sino a /home
+  { path: '', redirectTo: `/${rutas.RUTA_HOME}`, pathMatch: 'full' },
   { path: rutas.RUTA_LANDING, component: LandingPageComponent },
   { path: rutas.RUTA_CUENTA, component: MiPerfilComponent, canActivate: [AuthGuard] },
   { path: rutas.RUTA_HOME, component: PaginaPrincipalComponent, canActivate: [AuthGuard] },

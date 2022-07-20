@@ -11,6 +11,7 @@ export interface EnlaceExterno {
   nombre: string;
   caption?: string;
   url: string;
+  target: "_blank" | "_self";
 }
 
 export interface AccesoRapido {
