@@ -5,7 +5,7 @@ import { UiService } from "@core/service/ui.service";
 import { catchError, Observable, throwError } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
-export class TokenInterceptor implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private authService: AutenticacionService, private uiService: UiService) { }
 

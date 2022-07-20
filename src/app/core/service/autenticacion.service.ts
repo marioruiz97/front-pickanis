@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenInfo } from '@core/model/token-info.model';
 import * as rutas from '@shared/rutas.constants';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { UiService } from './ui.service';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AutenticacionService {
 
   usuarioEnSesion: TokenInfo | null = null;
   token: string | null = null;
-  estaAutenticado: Subject<boolean> = new Subject<boolean>();
+  estaAutenticado: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router, private uiService: UiService) { }
 
@@ -80,6 +80,13 @@ export class AutenticacionService {
     this.uiService.mostrarError({ title: "Ha fallado el inicio de sesión", message: "Por favor verifique los datos ingresados", errors })
   }
 
+  obtenerDatosToken(accessToken: any) {
+    if (accessToken != null) {
+      return JSON.parse(atob(accessToken.split(".")[1]));
+    }
+    return null;
+  }
+
   private get buscarToken(): any {
     let token = null;
     if (this.token) token = this.token;
@@ -87,12 +94,6 @@ export class AutenticacionService {
     return token;
   }
 
-  private obtenerDatosToken(accessToken: any) {
-    if (accessToken != null) {
-      return JSON.parse(atob(accessToken.split(".")[1]));
-    }
-    return null;
-  }
 
   private guardarToken(accessToken: any) {
     this.token = accessToken;
