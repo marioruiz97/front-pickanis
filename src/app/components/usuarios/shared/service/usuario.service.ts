@@ -5,13 +5,15 @@ import { AutenticacionService } from '@core/service/autenticacion.service';
 import { HttpService } from '@core/service/http.service';
 import { UiService } from '@core/service/ui.service';
 import { RegistroComponent } from '@feature/usuarios/components/registro/registro.component';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { AuthData } from '../model/auth-data.model';
+import { Perfil } from '../model/perfil-data.model';
 import { RegistroUsuario } from '../model/registro-usuario.model';
 
 @Injectable()
 export class UsuarioService {
 
+  private pathMiCuenta = "mi-cuenta";
   private urlRegistro = "cuenta/registro?tipoRegistro=";
 
   constructor(
@@ -19,6 +21,14 @@ export class UsuarioService {
     private uiService: UiService,
     private authService: AutenticacionService
   ) { }
+
+  cargarInformacionCuenta(): Observable<Perfil> {
+    return this.httpService.getRequest(this.pathMiCuenta);
+  }
+
+  guardarDatosPerfil(perfil: { idUsuario: string | null; nombre: any; apellido: any; direccion: any; telefono: any; correo: any; }) {
+    throw new Error('Method not implemented.'); // TODO: implementar
+  }
 
   async registrar(usuario: RegistroUsuario, seleccionPaseador: boolean, ref: MatDialogRef<RegistroComponent>) {
     const tipoRegistro = seleccionPaseador ? "paseador" : "usuario";

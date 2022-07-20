@@ -41,7 +41,7 @@ export class RegistroComponent {
       usuario: new FormControl('', [Validators.required, Validators.maxLength(15)]),
       contrasena: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(14)]),
       matchContrasena: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(14)]),
-      tiempoExperiencia: new FormControl('', [Validators.maxLength(255)]),
+      tiempoExperiencia: new FormControl('', [Validators.maxLength(100)]),
       perfil: new FormControl('', [Validators.maxLength(255)]),
     })
   }

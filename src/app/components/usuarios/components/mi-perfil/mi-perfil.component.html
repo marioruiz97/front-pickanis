@@ -8,7 +8,6 @@
 </mat-toolbar>
 
 
-
 <section fxLayout fxLayout.lt-sm="column">
   <mat-card class="mat-elevation-z5 m-2" fxFlex>
     <mat-card-header>
@@ -19,18 +18,21 @@
       </button>
     </mat-card-header>
     <mat-card-content>
-      <form autocomplete="off" class="p-2" [formGroup]="accountForm" (ngSubmit)="saveMyInfo()" fxLayout="column">
+      <form autocomplete="off" class="p-2" [formGroup]="accountForm" (ngSubmit)="guardarDatosPersonales()"
+        fxLayout="column">
         <div class="foto my-2"></div>
         <mat-form-field appearance="standard">
           <mat-label>Tipo Documento</mat-label>
           <input matInput type="text" formControlName="tipoDocumento">
           <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">article</mat-icon>
+          <mat-hint *ngIf="habilitarCampos">Este dato no se puede modificar</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>N° de Identificación</mat-label>
           <input matInput type="text" formControlName="identificacion">
           <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">credit_card</mat-icon>
+          <mat-hint *ngIf="habilitarCampos">Este dato no se puede modificar</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
@@ -41,14 +43,15 @@
 
         <mat-form-field appearance="standard">
           <mat-label>Apellidos</mat-label>
-          <input matInput type="text" formControlName="apellido1">
+          <input matInput type="text" formControlName="apellido">
           <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">face</mat-icon>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
           <mat-label>Nombre de Usuario</mat-label>
-          <input matInput type="text" formControlName="username">
+          <input matInput type="text" formControlName="nombreUsuario">
           <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">badge</mat-icon>
+          <mat-hint *ngIf="habilitarCampos">Este dato no se puede modificar</mat-hint>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
@@ -59,7 +62,7 @@
 
         <mat-form-field appearance="standard">
           <mat-label>Telefono Móvil</mat-label>
-          <input matInput type="number" formControlName="telefono">
+          <input matInput type="number" formControlName="celular">
           <mat-icon matPrefix class="mat-18" [inline]="habilitarCampos">phonelink_ring</mat-icon>
         </mat-form-field>
 
@@ -135,7 +138,7 @@
             </button>
           </mat-list-item>
           <mat-list-item>
-            <button mat-button (click)="onChangePass()" color="warn">
+            <button mat-button (click)="abrirModalContrasena()" color="warn">
               <mat-icon>lock_reset</mat-icon>
               <span class="pl-2">Cambiar contraseña</span>
             </button>
@@ -151,17 +154,3 @@
     </mat-card>
   </aside>
 </section>
-
-<section fxLayout fxLayout.lt-sm="column">
-
-</section>
-
-
-<mat-tab-group mat-stretch-tabs class="mat-elevation-z4">
-  <mat-tab label="Notificaciones">
-    <!-- <app-mis-proyectos *ngIf="_idUsuario" [idUsuario]="_idUsuario"></app-mis-proyectos> -->
-  </mat-tab>
-  <mat-tab label="Últimas actividades">
-    <!-- <app-mis-clientes *ngIf="_idUsuario" [idUsuario]="_idUsuario"></app-mis-clientes> -->
-  </mat-tab>
-</mat-tab-group>

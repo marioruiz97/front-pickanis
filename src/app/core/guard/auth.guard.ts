@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from "@angular/router";
 import { AutenticacionService } from "@core/service/autenticacion.service";
 import { Observable } from "rxjs";
 
@@ -8,8 +8,7 @@ import { Observable } from "rxjs";
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AutenticacionService,
-    private router: Router) { }
+  constructor(private authService: AutenticacionService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -18,9 +17,10 @@ export class AuthGuard implements CanActivate {
         this.authService.sesionExpirada();
         return false;
       }
+      if (state.url === '/landing') { this.authService.irAlHome(); }
       return true;
     }
-    this.router.navigate(['/landing']);
+    this.authService.irAlLogin();
     return false;
   }
 
@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
     const token = this.authService.token;
     const payload = this.authService.obtenerDatosToken(token);
     const now = new Date().getTime() / 1000;
-    return payload.exp < now ? true : false;
+    return payload === null || payload.exp < now ? true : false;
   }
 
 }

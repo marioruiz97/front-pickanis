@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@core/components/confirm-dialog/confirm-dialog.component';
+import { AutenticacionService } from '@core/service/autenticacion.service';
 import { UiService } from '@core/service/ui.service';
+import { Perfil } from '@feature/usuarios/shared/model/perfil-data.model';
 import { DIALOG_CONFIG } from '@shared/app.constants';
+import { UsuarioService } from '../../shared/service/usuario.service';
 
 
 @Component({
@@ -13,17 +16,20 @@ import { DIALOG_CONFIG } from '@shared/app.constants';
 })
 export class MiPerfilComponent implements OnInit {
 
-  private currentUser: any;
-  private idUsuario = 90;
-  private cuentaService: any
+  private miPerfil: Perfil | null;
+  private idUsuario: string | null;
   accountForm: FormGroup;
   habilitarCampos = false;
 
   constructor(
     private uiService: UiService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private service: UsuarioService,
+    private authService: AutenticacionService
   ) {
     this.accountForm = this.initForm();
+    this.miPerfil = null;
+    this.idUsuario = null;
   }
 
   get _idUsuario() {
@@ -31,33 +37,56 @@ export class MiPerfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // no debe estar vacío, ignorar alerta mientras
+    this.cargarInformacionPersonal();
+  }
+
+  cargarInformacionPersonal() {
+    this.service.cargarInformacionCuenta().subscribe({
+      next: (perfil) => {
+        this.miPerfil = perfil;
+        this.idUsuario = perfil.usuario.identificacion;
+        this.setForm(this.miPerfil);
+      },
+      error: () => {
+        this.uiService.mostrarConfirmDialog({ title: 'Error', message: 'No se pudo obtener la información. Intenta nuevamente' })
+          .afterClosed().subscribe(res => {
+            if (res) {
+              return this.cargarInformacionPersonal();
+            }
+            this.authService.irAlHome();
+          });
+      }
+    });
   }
 
   initForm() {
     return new FormGroup({
       nombre: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(40)]),
-      apellido1: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(30)]),
-      direccion: new FormControl({ value: '', disabled: true }, [Validators.maxLength(30)]),
+      apellido: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(30)]),
+      direccion: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(30)]),
       telefono: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(12)]),
-      username: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(64)]),
+      celular: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(12)]),
+      nombreUsuario: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(64)]),
       correo: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email, Validators.maxLength(64)]),
       identificacion: new FormControl({ value: '', disabled: true }),
       tipoDocumento: new FormControl({ value: '', disabled: true })
     });
   }
 
-  setForm(usuario: any) {
-    /* const tipoDoc = usuario.tipoDocumento as TipoDocumento;
+  setForm(perfil: Perfil) {
+    const usario = perfil.usuario;
+    const tipoDoc = "pendiente";
     this.accountForm.setValue({
-      nombre: usuario.nombre,
-      apellido1: usuario.apellido1,
-      direccion: usuario.direccion,
-      telefono: usuario.telefono,
-      correo: usuario.correo,
-      identificacion: usuario.identificacion,
-      tipoDocumento: tipoDoc.nombreTipoDocumento,
-    }); */
+      nombre: usario.nombre,
+      apellido: usario.apellido,
+      direccion: "pendiente",//perfil.direccion,
+      telefono: "11111111",//perfil.telefono,
+      celular: "11111111",//perfil.celular,
+      nombreUsuario: usario.nombreUsuario,
+      correo: usario.correo,
+      identificacion: usario.identificacion,
+      tipoDocumento: tipoDoc,
+    });
   }
 
   /*
@@ -66,53 +95,38 @@ export class MiPerfilComponent implements OnInit {
   toggleEdit() {
     this.habilitarCampos = !this.habilitarCampos;
     if (this.habilitarCampos) {
-      this.enableControls();
+      this.habilitarCamposFormulario();
     } else {
-      this.disableControls();
+      this.deshabilitarCamposFormulario();
     }
   }
 
-  enableControls() {
-    const controls = ['nombre', 'apellido1', 'direccion', 'telefono', 'correo'];
+  habilitarCamposFormulario() {
+    const controls = ['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'correo'];
     controls.forEach(control => this.accountForm.controls[control].enable());
   }
 
-  disableControls() {
-    const controls = ['nombre', 'apellido1', 'direccion', 'telefono', 'correo'];
+  deshabilitarCamposFormulario() {
+    const controls = ['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'correo'];
     controls.forEach(control => this.accountForm.controls[control].disable());
   }
 
-  getMyInfo() {
-    /* this.subs.push(this.cuentaService.myInfo.subscribe(res => {
-      this.currentUser = res.body as Usuario;
-      this.idUsuario = this.currentUser.idUsuario;
-      this.setForm(this.currentUser);
-    }, _ => {
-      this.uiService.showConfirm({ title: 'Error', message: 'No se pudo obtener la información. Intenta nuevamente' })
-        .afterClosed().subscribe(res => {
-          if (res) {
-            return this.cuentaService.myInfo;
-          }
-          this.authService.goToHome();
-        });
-    })); */
-  }
 
-  saveMyInfo() {
+  guardarDatosPersonales() {
     const form = this.accountForm.value;
-    const user = {
+    const perfil = {
       idUsuario: this.idUsuario,
       nombre: form.nombre,
-      apellido1: form.apellido1,
+      apellido: form.apellido,
       direccion: form.direccion,
       telefono: form.telefono,
       correo: form.correo
     };
     this.toggleEdit();
-    this.cuentaService.saveMyInfo(user).finally(() => this.getMyInfo());
+    this.service.guardarDatosPerfil(perfil);
   }
 
-  onChangePass() {
+  abrirModalContrasena() {
     /* no code this.matDialog.open(ChangePasswordComponent, { data: { idUsuario: this.idUsuario } }); */
   }
 
@@ -129,7 +143,5 @@ export class MiPerfilComponent implements OnInit {
     }
     this.matDialog.open(ConfirmDialogComponent, { ...DIALOG_CONFIG, data });
   }
-
-
 
 }

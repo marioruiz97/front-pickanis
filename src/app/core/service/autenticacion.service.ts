@@ -33,7 +33,7 @@ export class AutenticacionService {
     return "";
   }
 
-  private irAlLogin() {
+  irAlLogin() {
     this.router.navigate([rutas.RUTA_LANDING]);
   }
 
@@ -81,16 +81,20 @@ export class AutenticacionService {
   }
 
   obtenerDatosToken(accessToken: any) {
-    if (accessToken != null) {
-      return JSON.parse(atob(accessToken.split(".")[1]));
+    const token = accessToken !== null ? accessToken : this.buscarToken;
+    if (token != null) {
+      return JSON.parse(atob(token.split(".")[1]));
     }
     return null;
   }
 
-  private get buscarToken(): any {
+  get buscarToken(): any {
     let token = null;
-    if (this.token) token = this.token;
-    else if (!this.token && sessionStorage.getItem('token') != null) token = sessionStorage.getItem('token');
+    if (this.token) { token = this.token; }
+    else if (!this.token && sessionStorage.getItem('token') != null) {
+      token = sessionStorage.getItem('token');
+      this.token = token;
+    }
     return token;
   }
 
