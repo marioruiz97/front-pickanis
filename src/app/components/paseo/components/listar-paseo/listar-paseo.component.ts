@@ -15,7 +15,7 @@ import { DIALOG_CONFIG } from '@shared/app.constants';
   styleUrls: ['./listar-paseo.component.css'],
 })
 export class ListarPaseoComponent implements AfterViewInit, OnDestroy {
-  displayedColumns = ['Paseo', 'Publicador', 'Mascota', 'Fecha Publicación', 'descripcioón'];
+  displayedColumns = ['Paseo', 'Publicador', 'Mascota', 'Fecha Publicación', 'descripción','Acciones'];
   datasource = new MatTableDataSource<Paseo>();
   private suscripciones: Subscription[] = [];
 
@@ -24,7 +24,7 @@ export class ListarPaseoComponent implements AfterViewInit, OnDestroy {
 
   constructor(private service: PaseoService, private matDialog: MatDialog) {
     this.datasource.data.push({
-      idPaseo: 1, idPublicador: 1, idMascota : 1 ,fechaPublicacion: new Date(),fechaInicio: new Date(), fechaFinal: new Date(),estado: true, descripcion : 'Paseo completo',tipo:''
+      idPaseo: 1, idPublicador: 1, idMascota : 1 ,fechaPublicacion: new Date(),fechaInicio: new Date(), fechaFinal: new Date(),estado: true, descripcion : 'Paseo completo', tipo:' '
     })
   }
 
@@ -43,7 +43,7 @@ export class ListarPaseoComponent implements AfterViewInit, OnDestroy {
   }
 
   editarPaseo(paseo: Paseo): void {
-    this.matDialog.open(GuardarPaseoComponent, { ...DIALOG_CONFIG, data: { ...paseo} });
+    this.matDialog.open(GuardarPaseoComponent, { ...DIALOG_CONFIG, data: { ...paseo } });
   }
 
   ngOnDestroy(): void {

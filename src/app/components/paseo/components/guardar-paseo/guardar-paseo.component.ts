@@ -42,12 +42,12 @@ export class GuardarPaseoComponent implements OnInit {
   private iniciarFormulario(): void {
     this.paseoForm = new FormGroup({
       idPaseo: new FormControl({ value: '', disabled: true }),
-      nombre: new FormControl('', [Validators.required]),
-      raza: new FormControl('', [Validators.required]),
-      sexo: new FormControl('', [Validators.required]),
-      fechaNacimiento: new FormControl('', [Validators.required]),
-      peso: new FormControl('', [Validators.required, Validators.min(0.2)]),
-      observaciones: new FormControl('', [Validators.maxLength(255)]),
+      idPublicador: new FormControl('', [Validators.required]),
+      idMascota: new FormControl('', [Validators.required]),
+      fechaPublicacion: new FormControl('', [Validators.required]),
+      fechaInicio: new FormControl('', [Validators.required]),
+      fechaFinal: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.maxLength(255)]),
     });
     this.paseoForm.markAsTouched();
   }

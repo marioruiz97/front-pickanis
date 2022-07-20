@@ -115,6 +115,7 @@
   },
   "defaultProject": "front-pickanis",
   "cli": {
+    "analytics": "fb8a3d19-af4e-4f33-999e-23898a0bc387",
     "defaultCollection": "@angular-eslint/schematics"
   }
 }
