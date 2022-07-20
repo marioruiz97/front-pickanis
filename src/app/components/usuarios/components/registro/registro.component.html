@@ -66,6 +66,12 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="outline" class="form-input">
+      <mat-label>Direccion</mat-label>
+      <input matInput type="text" placeholder="Ej. calle 1 # 2 - 3" formControlName="direccion">
+      <mat-hint>Ingrese su dirección, no pasar de 50 caractéres</mat-hint>
+    </mat-form-field>
+
     <!-- correo electronico -->
     <mat-form-field appearance="outline" class="form-input">
       <mat-label>Correo electrónico</mat-label>
@@ -74,7 +80,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" class="form-input">
       <mat-label>Nombre de usuario</mat-label>
-      <input matInput type="text" placeholder="Ej. MarioRuiz97" formControlName="usuario" autocomplete="off">
+      <input matInput type="text" placeholder="Ej. MarioRuiz97" formControlName="nombreUsuario" autocomplete="off">
       <mat-hint>Ingrese su nombre de usuario para inicio de sesión</mat-hint>
     </mat-form-field>
 

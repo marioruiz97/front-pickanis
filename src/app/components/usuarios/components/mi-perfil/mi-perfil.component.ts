@@ -5,6 +5,7 @@ import { ConfirmDialogComponent } from '@core/components/confirm-dialog/confirm-
 import { AutenticacionService } from '@core/service/autenticacion.service';
 import { UiService } from '@core/service/ui.service';
 import { Perfil } from '@feature/usuarios/shared/model/perfil-data.model';
+import { obtenerTipoDocumento } from '@feature/usuarios/shared/model/tipo-documento.model';
 import { DIALOG_CONFIG } from '@shared/app.constants';
 import { UsuarioService } from '../../shared/service/usuario.service';
 
@@ -63,9 +64,9 @@ export class MiPerfilComponent implements OnInit {
     return new FormGroup({
       nombre: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(40)]),
       apellido: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(30)]),
-      direccion: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(30)]),
-      telefono: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(12)]),
-      celular: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(12)]),
+      direccion: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(50)]),
+      telefonoFijo: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(12), Validators.pattern('(^$|[0-9]*)')]),
+      celular: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(12), Validators.pattern('(^$|[0-9]*)')]),
       nombreUsuario: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.maxLength(64)]),
       correo: new FormControl({ value: '', disabled: true }, [Validators.required, Validators.email, Validators.maxLength(64)]),
       identificacion: new FormControl({ value: '', disabled: true }),
@@ -74,18 +75,19 @@ export class MiPerfilComponent implements OnInit {
   }
 
   setForm(perfil: Perfil) {
-    const usario = perfil.usuario;
-    const tipoDoc = "pendiente";
+    const usuario = perfil.usuario;
+    const contacto = usuario.contacto;
+    const tipoDoc = obtenerTipoDocumento(usuario.tipoDocumento);
     this.accountForm.setValue({
-      nombre: usario.nombre,
-      apellido: usario.apellido,
-      direccion: "pendiente",//perfil.direccion,
-      telefono: "11111111",//perfil.telefono,
-      celular: "11111111",//perfil.celular,
-      nombreUsuario: usario.nombreUsuario,
-      correo: usario.correo,
-      identificacion: usario.identificacion,
-      tipoDocumento: tipoDoc,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      direccion: contacto.direccion,
+      telefonoFijo: contacto.telefonoFijo,
+      celular: contacto.celular,
+      nombreUsuario: usuario.nombreUsuario,
+      correo: usuario.correo,
+      identificacion: usuario.identificacion,
+      tipoDocumento: tipoDoc.nombreTipoDocumento,
     });
   }
 
@@ -102,12 +104,12 @@ export class MiPerfilComponent implements OnInit {
   }
 
   habilitarCamposFormulario() {
-    const controls = ['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'correo'];
+    const controls = ['nombre', 'apellido', 'direccion', 'telefonoFijo', 'celular', 'correo'];
     controls.forEach(control => this.accountForm.controls[control].enable());
   }
 
   deshabilitarCamposFormulario() {
-    const controls = ['nombre', 'apellido', 'direccion', 'telefono', 'celular', 'correo'];
+    const controls = ['nombre', 'apellido', 'direccion', 'telefonoFijo', 'celular', 'correo'];
     controls.forEach(control => this.accountForm.controls[control].disable());
   }
 
@@ -119,11 +121,11 @@ export class MiPerfilComponent implements OnInit {
       nombre: form.nombre,
       apellido: form.apellido,
       direccion: form.direccion,
-      telefono: form.telefono,
+      telefonoFijo: form.telefonoFijo,
       correo: form.correo
     };
     this.toggleEdit();
-    this.service.guardarDatosPerfil(perfil);
+    //this.service.guardarDatosPerfil(perfil);
   }
 
   abrirModalContrasena() {
