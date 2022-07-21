@@ -1,0 +1,83 @@
+<div class="row">
+  <!-- mat-dialog-title -->
+  <h3>Registro Paseo</h3>
+  <div fxFlex></div>
+  <button mat-icon-button matTooltip="Cerrar" [matDialogClose]="true">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<form autocomplete="off" [formGroup]="paseoForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field fxHide>
+      <mat-label>Código Asignado</mat-label>
+      <input matInput formControlName="idPaseo" />
+    </mat-form-field>
+
+    <mat-form-field fxHide>
+      <mat-label>Código Interesado</mat-label>
+      <input matInput formControlName="idPublicador" />
+    </mat-form-field>
+
+    <mat-form-field fxHide>
+      <mat-label>Código Mascota</mat-label>
+      <input matInput formControlName="idMascota" />
+    </mat-form-field>
+
+    <div class="form-group" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="1em">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Fecha de Publicación del Paseo</mat-label>
+        <input matInput [max]="maxDate" [matDatepicker]="nacimiento" formControlName="fechaPublicacion" />
+        <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
+        <mat-datepicker #nacimiento></mat-datepicker>
+        <mat-hint>Ingresa la Fecha de Publicación del Paseo</mat-hint>
+        <mat-error>La Fecha de Publicación del Paseo es un campo obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="1em">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Fecha de Inicial del Paseo</mat-label>
+        <input matInput [max]="maxDate" [matDatepicker]="nacimiento" formControlName="fechaInicio" />
+        <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
+        <mat-datepicker #nacimiento></mat-datepicker>
+        <mat-hint>Ingresa la Fecha de Inicial del Paseo</mat-hint>
+        <mat-error>La Fecha de Inicial del Paseo es un campo obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="1em">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Fecha de Final del Paseo</mat-label>
+        <input matInput [max]="maxDate" [matDatepicker]="nacimiento" formControlName="fechaFinal" />
+        <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
+        <mat-datepicker #nacimiento></mat-datepicker>
+        <mat-hint>Ingresa la Fecha de Final del Paseo</mat-hint>
+        <mat-error>La Fecha de Final del Paseo es un campo obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group" fxLayout="column">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Descripción</mat-label>
+        <textarea matInput formControlName="descripcion"></textarea>
+        <mat-icon matPrefix>message</mat-icon>
+        <mat-hint>
+          <p>Ingrese los detalles del paseo</p>
+          <p> Máximo 255 caracteres / actual:{{ paseoForm.value.observaciones.length }} </p>
+        </mat-hint>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="form-actions" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-evenly"
+    fxLayoutGap="20x">
+    <button type="button" mat-raised-button [matDialogClose]="true" color="warn" *ngIf="!isWaiting">
+      Cancelar
+    </button>
+    <button type="submit" mat-raised-button color="primary" *ngIf="!isWaiting" [disabled]="paseoForm.invalid">
+      Guardar paseo
+    </button>
+    <mat-spinner *ngIf="isWaiting"></mat-spinner>
+  </mat-dialog-actions>
+</form>

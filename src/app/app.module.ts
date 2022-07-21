@@ -12,6 +12,7 @@ import { UsuariosModule } from './components/usuarios/usuarios.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MascotaModule } from './components/mascota/mascota.module';
 import { PaseadoresModule } from './components/paseadores/paseadores.module';
+import { PaseoModule } from './components/paseo/paseo.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PaseadoresModule } from './components/paseadores/paseadores.module';
     CoreModule,
     UsuariosModule,
     MascotaModule,
-    PaseadoresModule
+    PaseadoresModule,
+    PaseoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
