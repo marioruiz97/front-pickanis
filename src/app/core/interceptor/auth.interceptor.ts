@@ -29,7 +29,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.uiService.mostrarError({ title: 'Acceso Denegado', message: 'No tienes acceso a este recurso', confirm: 'Ok', showCancel: false });
           this.authService.irAlHome();
         }
-        return throwError(() => new Error(err));
+        return throwError(() => err);
       })
     );
   }

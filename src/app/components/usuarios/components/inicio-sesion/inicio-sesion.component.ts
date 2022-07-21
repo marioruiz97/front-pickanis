@@ -47,7 +47,7 @@ export class InicioSesionComponent {
   private iniciarFormGroup() {
     return new FormGroup({
       correo: new FormControl('', [Validators.email]),
-      username: new FormControl('', [Validators.minLength(6)]),
+      username: new FormControl('', [Validators.minLength(4)]),
       contrasena: new FormControl('', [Validators.required, Validators.minLength(6)]),
     })
   }
@@ -55,7 +55,7 @@ export class InicioSesionComponent {
   private validarModoInicio(): boolean {
     let esValido = false;
     if (this.iniciarConCorreo && this.loginForm.value.correo && this.loginForm.value.correo.includes('@')) esValido = true;
-    if (!this.iniciarConCorreo && this.loginForm.value.username && this.loginForm.value.username.length >= 6) esValido = true;
+    if (!this.iniciarConCorreo && this.loginForm.value.username && this.loginForm.value.username.length >= 4) esValido = true;
     return esValido;
   }
 

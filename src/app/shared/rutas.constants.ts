@@ -51,7 +51,6 @@ export const RUTAS_DICCIONARIO: TerminoRuta[] = [
       }
     }
   },
-  { termino: RUTA_PASEOS, definicion: { clave: RUTA_HOME, nombre: "Menú principal" } },
   {
     termino: RUTA_PASEADORES, definicion: {
       clave: RUTA_HOME, nombre: "Menú principal", siguiente:

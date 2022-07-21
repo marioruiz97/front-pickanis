@@ -32,14 +32,14 @@ export class RegistroComponent {
   private iniciarFormGroup(): FormGroup {
     return new FormGroup({
       tipoDocumento: new FormControl('', [Validators.required]),
-      identificacion: new FormControl('', [Validators.required, Validators.min(1), Validators.maxLength(10), Validators.minLength(6)]),
+      identificacion: new FormControl('', [Validators.required, Validators.min(1), Validators.max(1000000000000000)]),
       nombre: new FormControl('', [Validators.required, Validators.maxLength(80)]),
       apellidos: new FormControl('', [Validators.required, Validators.maxLength(70)]),
       direccion: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       telefono: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(11), Validators.pattern('(^$|[0-9]*)')]),
       celular: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(11), Validators.pattern('(^$|[0-9]*)')]),
       correo: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(64)]),
-      nombreUsuario: new FormControl('', [Validators.required, Validators.maxLength(15)]),
+      nombreUsuario: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(15)]),
       contrasena: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(14)]),
       matchContrasena: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(14)]),
       tiempoExperiencia: new FormControl('', [Validators.maxLength(100)]),

@@ -77,7 +77,13 @@ export class AutenticacionService {
     } else {
       errors.push('Usuario o contraseña incorrectas, intenta nuevamente');
     }
-    this.uiService.mostrarError({ title: "Ha fallado el inicio de sesión", message: "Por favor verifique los datos ingresados", errors, showCancel: false })
+    this.uiService.mostrarError({
+      title: "Ha fallado el inicio de sesión",
+      message: "Por favor verifique los datos ingresados",
+      errors,
+      confirm: "Ok",
+      showCancel: false
+    })
   }
 
   obtenerDatosToken(accessToken: any) {

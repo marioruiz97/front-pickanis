@@ -27,11 +27,9 @@ export class UsuarioService {
   }
 
   guardarDatosPerfil(perfil: InformacionPersonal) {
-    console.log(perfil)
     const path = `${this.pathMiCuenta}/info-personal/${perfil.identificacion}`
     this.httpService.postRequest<InformacionPersonal, any>(path, perfil).subscribe({
-      next: (respuesta) => {
-        console.log("exito guardando perfil", respuesta)
+      next: () => {
         this.uiService.mostrarConfirmDialog({
           title: "Se guardó la información personal con éxito",
           message: "los datos en el menú lateral no se recargarán hasta tu próximo inicio de sesión",
@@ -54,7 +52,7 @@ export class UsuarioService {
         this.iniciarSesion(authData, ref);
       }
     }).catch(err => {
-      console.log("error en registro de usuarios", err(0));
+      console.log("error en registro de usuarios", err);
       this.uiService.mostrarError({
         title: "Ha fallado el registro",
         message: err.error.message,
