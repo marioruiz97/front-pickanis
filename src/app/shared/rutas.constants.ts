@@ -61,11 +61,8 @@ export const RUTAS_DICCIONARIO: TerminoRuta[] = [
     termino: RUTA_PASEOS, definicion: {
       clave: RUTA_HOME, nombre: "Menú principal", siguiente:
       {
-        clave: RUTA_CUENTA, nombre: "Paseos", siguiente:
-        {
-          clave: RUTA_DASHBOARD, nombre: "Tablero", siguiente:
-            { clave: RUTA_PASEOS, nombre: "Paseos" }
-        }
+        clave: RUTA_DASHBOARD, nombre: "Tablero", siguiente:
+          { clave: RUTA_PASEOS, nombre: "Paseos" }
       }
     }
   },
