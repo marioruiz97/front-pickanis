@@ -3,4 +3,5 @@ export interface ConfirmDialogData {
   message: string;
   errors?: string[];
   confirm?: string;
+  showCancel: boolean;
 }

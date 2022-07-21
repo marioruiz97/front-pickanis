@@ -15,3 +15,10 @@ export const obtenerTipoDocumento = (tipo: string | number): TipoDocumento => {
   if (tipo === 'TARJETA_IDENTIDAD' || tipo === 3) { return { id: 3, nombreTipoDocumento: "Tarjeta de identidad" } }
   return { id: 1, nombreTipoDocumento: "Cedula de ciudadania" };
 }
+
+export const obtenerIdTipoDocumento = (tipo: string | number): number => {
+  if (tipo === 'CEDULA' || tipo === 1) { return 1 }
+  if (tipo === 'PASAPORTE' || tipo === 2) { return 2 }
+  if (tipo === 'TARJETA_IDENTIDAD' || tipo === 3) { return 3 }
+  return 1;
+}

@@ -4,8 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@core/components/confirm-dialog/confirm-dialog.component';
 import { AutenticacionService } from '@core/service/autenticacion.service';
 import { UiService } from '@core/service/ui.service';
-import { Perfil } from '@feature/usuarios/shared/model/perfil-data.model';
-import { obtenerTipoDocumento } from '@feature/usuarios/shared/model/tipo-documento.model';
+import { InformacionPersonal, Perfil } from '@feature/usuarios/shared/model/perfil-data.model';
+import { obtenerIdTipoDocumento, obtenerTipoDocumento } from '@feature/usuarios/shared/model/tipo-documento.model';
 import { DIALOG_CONFIG } from '@shared/app.constants';
 import { UsuarioService } from '../../shared/service/usuario.service';
 
@@ -18,7 +18,8 @@ import { UsuarioService } from '../../shared/service/usuario.service';
 export class MiPerfilComponent implements OnInit {
 
   private miPerfil: Perfil | null;
-  private idUsuario: string | null;
+  private identificacion: string;
+  private nombreUsuario: string;
   accountForm: FormGroup;
   habilitarCampos = false;
 
@@ -30,11 +31,12 @@ export class MiPerfilComponent implements OnInit {
   ) {
     this.accountForm = this.initForm();
     this.miPerfil = null;
-    this.idUsuario = null;
+    this.identificacion = "0000";
+    this.nombreUsuario = "0000";
   }
 
-  get _idUsuario() {
-    return this.idUsuario;
+  get _identificacion() {
+    return this.identificacion;
   }
 
   ngOnInit(): void {
@@ -45,11 +47,12 @@ export class MiPerfilComponent implements OnInit {
     this.service.cargarInformacionCuenta().subscribe({
       next: (perfil) => {
         this.miPerfil = perfil;
-        this.idUsuario = perfil.usuario.identificacion;
+        this.identificacion = perfil.usuario.identificacion;
+        this.nombreUsuario = perfil.usuario.nombreUsuario;
         this.setForm(this.miPerfil);
       },
       error: () => {
-        this.uiService.mostrarConfirmDialog({ title: 'Error', message: 'No se pudo obtener la información. Intenta nuevamente' })
+        this.uiService.mostrarConfirmDialog({ title: 'Error', message: 'No se pudo obtener la información. Intenta nuevamente', showCancel: true })
           .afterClosed().subscribe(res => {
             if (res) {
               return this.cargarInformacionPersonal();
@@ -91,9 +94,6 @@ export class MiPerfilComponent implements OnInit {
     });
   }
 
-  /*
- metodo usado para activar formulario de edición y para aparecer los botonoes de guardar y cancelar
- */
   toggleEdit() {
     this.habilitarCampos = !this.habilitarCampos;
     if (this.habilitarCampos) {
@@ -116,20 +116,23 @@ export class MiPerfilComponent implements OnInit {
 
   guardarDatosPersonales() {
     const form = this.accountForm.value;
-    const perfil = {
-      idUsuario: this.idUsuario,
+    const perfil: InformacionPersonal = {
       nombre: form.nombre,
       apellido: form.apellido,
       direccion: form.direccion,
       telefonoFijo: form.telefonoFijo,
-      correo: form.correo
+      celular: form.celular,
+      nombreUsuario: this.nombreUsuario,
+      correo: form.correo,
+      identificacion: this.identificacion,
+      tipoDocumento: obtenerIdTipoDocumento(form.tipoDocumento)
     };
     this.toggleEdit();
-    //this.service.guardarDatosPerfil(perfil);
+    this.service.guardarDatosPerfil(perfil);
   }
 
   abrirModalContrasena() {
-    /* no code this.matDialog.open(ChangePasswordComponent, { data: { idUsuario: this.idUsuario } }); */
+    /* no code this.matDialog.open(ChangePasswordComponent, { data: { identificacion: this.identificacion } }); */
   }
 
   verificarCuenta() {

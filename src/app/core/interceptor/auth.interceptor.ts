@@ -26,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.authService.sesionExpirada();
         }
         if (err.status === 403) {
-          this.uiService.mostrarError({ title: 'Acceso Denegado', message: 'No tienes acceso a este recurso', confirm: 'Ok' });
+          this.uiService.mostrarError({ title: 'Acceso Denegado', message: 'No tienes acceso a este recurso', confirm: 'Ok', showCancel: false });
           this.authService.irAlHome();
         }
         return throwError(() => new Error(err));

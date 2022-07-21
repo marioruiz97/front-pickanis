@@ -43,7 +43,7 @@ export class UiService {
           exito.next(false);
           const message = err.error ? err.error.mensaje : 'Ha ocurrido un error, contacta un administrador';
           const errors: string[] = err.error && err.error.errors ? err.error.errors : [];
-          this.mostrarError({ title: 'Error', message, errors, confirm: 'Ok' });
+          this.mostrarError({ title: 'Error', message, errors, confirm: 'Ok', showCancel: true });
         });
     });
   }
@@ -55,6 +55,7 @@ export class UiService {
         message: data.message,
         errors: data.errors ? data.errors : [],
         confirm: data.confirm,
+        showCancel: data.showCancel
       },
     });
   }

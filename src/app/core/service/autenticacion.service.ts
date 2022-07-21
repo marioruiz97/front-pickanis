@@ -42,7 +42,7 @@ export class AutenticacionService {
   }
 
   sesionExpirada(): void {
-    this.uiService.mostrarError({ title: 'La sesión ha expirado!', message: 'Ingresa al sistema nuevamente', confirm: 'Ok' });
+    this.uiService.mostrarError({ title: 'La sesión ha expirado!', message: 'Ingresa al sistema nuevamente', confirm: 'Ok', showCancel: false });
     this.cerrarSesion();
     this.estaAutenticado.next(false);
   }
@@ -77,7 +77,7 @@ export class AutenticacionService {
     } else {
       errors.push('Usuario o contraseña incorrectas, intenta nuevamente');
     }
-    this.uiService.mostrarError({ title: "Ha fallado el inicio de sesión", message: "Por favor verifique los datos ingresados", errors })
+    this.uiService.mostrarError({ title: "Ha fallado el inicio de sesión", message: "Por favor verifique los datos ingresados", errors, showCancel: false })
   }
 
   obtenerDatosToken(accessToken: any) {

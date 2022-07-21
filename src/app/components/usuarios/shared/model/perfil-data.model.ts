@@ -9,3 +9,15 @@ export interface Perfil {
   perfilExperiencia: string;
   estado: boolean;
 }
+
+export interface InformacionPersonal {
+  nombre: string;
+  apellido: string;
+  direccion: string;
+  telefonoFijo: string;
+  celular: string;
+  nombreUsuario: string;
+  correo: string;
+  identificacion: string;
+  tipoDocumento: number;
+}

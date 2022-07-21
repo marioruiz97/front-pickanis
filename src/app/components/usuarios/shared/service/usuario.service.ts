@@ -7,7 +7,7 @@ import { UiService } from '@core/service/ui.service';
 import { RegistroComponent } from '@feature/usuarios/components/registro/registro.component';
 import { lastValueFrom, Observable } from 'rxjs';
 import { AuthData } from '../model/auth-data.model';
-import { Perfil } from '../model/perfil-data.model';
+import { InformacionPersonal, Perfil } from '../model/perfil-data.model';
 import { RegistroUsuario } from '../model/registro-usuario.model';
 
 @Injectable()
@@ -26,8 +26,23 @@ export class UsuarioService {
     return this.httpService.getRequest(this.pathMiCuenta);
   }
 
-  guardarDatosPerfil(perfil: { idUsuario: string | null; nombre: any; apellido: any; direccion: any; telefono: any; correo: any; }) {
-    throw new Error('Method not implemented.'); // TODO: implementar
+  guardarDatosPerfil(perfil: InformacionPersonal) {
+    console.log(perfil)
+    const path = `${this.pathMiCuenta}/info-personal/${perfil.identificacion}`
+    this.httpService.postRequest<InformacionPersonal, any>(path, perfil).subscribe({
+      next: (respuesta) => {
+        console.log("exito guardando perfil", respuesta)
+        this.uiService.mostrarConfirmDialog({
+          title: "Se guardó la información personal con éxito",
+          message: "los datos en el menú lateral no se recargarán hasta tu próximo inicio de sesión",
+          confirm: "Ok",
+          showCancel: false
+        });
+      },
+      error: () => {
+        this.uiService.mostrarError({ title: "Error actualizando informacion personal", message: "Intenta nuevamente", confirm: "Ok", showCancel: false });
+      }
+    })
   }
 
   async registrar(usuario: RegistroUsuario, seleccionPaseador: boolean, ref: MatDialogRef<RegistroComponent>) {
@@ -39,8 +54,14 @@ export class UsuarioService {
         this.iniciarSesion(authData, ref);
       }
     }).catch(err => {
-      console.log("error en registro de usuarios", err);
-      this.uiService.mostrarError({ title: "Ha fallado el registro", message: err.error.message, errors: err.error.errors ? err.error.errors : [], confirm: 'Ok' })
+      console.log("error en registro de usuarios", err(0));
+      this.uiService.mostrarError({
+        title: "Ha fallado el registro",
+        message: err.error.message,
+        errors: err.error.errors ? err.error.errors : [],
+        confirm: 'Ok',
+        showCancel: false
+      })
     });
   }
 
