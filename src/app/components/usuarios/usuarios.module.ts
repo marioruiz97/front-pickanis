@@ -7,6 +7,7 @@ import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ContactoEmergenciaComponent } from './components/contacto-emergencia/contacto-emergencia.component';
 
 
 
@@ -14,7 +15,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
   declarations: [
     RegistroComponent,
     InicioSesionComponent,
-    MiPerfilComponent
+    MiPerfilComponent,
+    ContactoEmergenciaComponent
   ],
   imports: [
     CommonModule,

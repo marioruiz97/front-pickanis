@@ -2,7 +2,7 @@
   <!-- mat-dialog-title -->
   <h3>Registro Mascota</h3>
   <div fxFlex></div>
-  <button mat-icon-button matTooltip="Cerrar" [matDialogClose]="true">
+  <button mat-icon-button matTooltip="Cerrar" matDialogClose>
     <mat-icon>clear</mat-icon>
   </button>
 </div>
@@ -71,7 +71,7 @@
 
   <mat-dialog-actions class="form-actions" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-evenly"
     fxLayoutGap="20x">
-    <button type="button" mat-raised-button [matDialogClose]="true" color="warn" *ngIf="!isWaiting">
+    <button type="button" mat-raised-button matDialogClose color="warn" *ngIf="!isWaiting">
       Cancelar
     </button>
     <button type="submit" mat-raised-button color="primary" *ngIf="!isWaiting" [disabled]="mascotaForm.invalid">

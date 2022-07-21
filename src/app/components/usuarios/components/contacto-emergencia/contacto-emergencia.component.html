@@ -1,0 +1,45 @@
+<div>
+  <h1 mat-dialog-title>{{esAgregar? 'Agregar contacto de emergencia' : 'Editar contacto de emergencia'}}</h1>
+  <div fxFlex></div>
+  <button mat-icon-button [matDialogClose]="false">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+
+<form (ngSubmit)="guardarContacto()" [formGroup]="contactoForm" fxLayout="column">
+
+
+  <!-- nombre -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nombre contacto de emergencia </mat-label>
+    <input type="text" matInput placeholder="Ej. Mario Ruiz" formControlName="nombre">
+    <mat-hint>Ingese el nombre del contacto</mat-hint>
+    <mat-error>Ingrese un nombre válido</mat-error>
+  </mat-form-field>
+
+  <!-- celular -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Celular del contacto</mat-label>
+    <input type="text" matInput placeholder="Ej. 3015432134" formControlName="celular">
+    <mat-hint>Ingese el celular del contacto</mat-hint>
+    <mat-error>El celular es un campo obligatorio entre 10 y 12 caracteres. actual {{form.celular.length}}</mat-error>
+  </mat-form-field>
+
+  <!-- Teléfono fijo -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Teléfono fijo del contacto </mat-label>
+    <input type="text" matInput placeholder="Ej. 6045045654" formControlName="telefonoFijo">
+    <mat-hint>Ingese el teléfono fijo del contacto. No es obligatorio</mat-hint>
+    <mat-error>Verifique que el teléfono tenga entre 7 y 12 caracteres. actual {{form.celular.length}}</mat-error>
+  </mat-form-field>
+
+  <mat-dialog-actions>
+    <div fxFlex></div>
+    <button mat-button [matDialogClose]="false">Cancelar</button>
+    <button mat-button type="submit" color="primary" [disabled]="!contactoForm.valid">
+      {{esAgregar? 'Agregar' : 'Editar'}}
+    </button>
+  </mat-dialog-actions>
+
+</form>

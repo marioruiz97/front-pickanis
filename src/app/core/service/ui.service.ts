@@ -64,8 +64,8 @@ export class UiService {
     this.router.navigate([ruta]);
   }
 
-  mostrarError(data: ConfirmDialogData): void {
-    this.mostrarConfirmDialog({ ...data });
+  mostrarError(data: ConfirmDialogData): MatDialogRef<ConfirmDialogComponent> {
+    return this.mostrarConfirmDialog({ ...data });
   }
 
 }

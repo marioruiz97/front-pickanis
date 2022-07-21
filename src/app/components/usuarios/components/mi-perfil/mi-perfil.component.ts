@@ -4,10 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '@core/components/confirm-dialog/confirm-dialog.component';
 import { AutenticacionService } from '@core/service/autenticacion.service';
 import { UiService } from '@core/service/ui.service';
+import { ContactoEmergencia } from '@feature/usuarios/shared/model/contacto-usuario.model';
 import { InformacionPersonal, Perfil } from '@feature/usuarios/shared/model/perfil-data.model';
 import { obtenerIdTipoDocumento, obtenerTipoDocumento } from '@feature/usuarios/shared/model/tipo-documento.model';
 import { DIALOG_CONFIG } from '@shared/app.constants';
 import { UsuarioService } from '../../shared/service/usuario.service';
+import { ContactoEmergenciaComponent } from '../contacto-emergencia/contacto-emergencia.component';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class MiPerfilComponent implements OnInit {
   private miPerfil: Perfil | null;
   private identificacion: string;
   private nombreUsuario: string;
+  contactos: ContactoEmergencia[] = [];
   accountForm: FormGroup;
   habilitarCampos = false;
 
@@ -41,6 +44,19 @@ export class MiPerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarInformacionPersonal();
+    this.cargarMisContactosEmergencia();
+  }
+
+  cargarMisContactosEmergencia() {
+    this.service.cargarMisContactosEmergencia().subscribe({
+      next: (respuesta: ContactoEmergencia[]) => {
+        this.contactos = respuesta;
+      }
+    });
+  }
+
+  formatearTelefono(telefono: string) {
+    return "+57 " + telefono.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
   }
 
   cargarInformacionPersonal() {
@@ -129,6 +145,24 @@ export class MiPerfilComponent implements OnInit {
     };
     this.toggleEdit();
     this.service.guardarDatosPerfil(perfil);
+  }
+
+  abrirModalContactos(data?: ContactoEmergencia | undefined) {
+    this.matDialog.open(ContactoEmergenciaComponent, { data }).afterClosed().subscribe({
+      next: (respuesta => {
+        console.log(respuesta)
+        if (this.contactos.length === 0) { this.contactos.push(respuesta); }
+        else {
+          this.contactos = this.contactos.map(contacto => {
+            if (contacto.id === respuesta.id) {
+              contacto = respuesta;
+            }
+            return contacto;
+          });
+        }
+        if (respuesta && this.contactos.indexOf(respuesta) === -1) { this.contactos.push(respuesta); }
+      })
+    });
   }
 
   abrirModalContrasena() {

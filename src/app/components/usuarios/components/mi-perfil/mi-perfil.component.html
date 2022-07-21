@@ -98,20 +98,19 @@
       </mat-card-header>
       <mat-card-content>
         <mat-list>
-          <mat-list-item>
+          <mat-list-item *ngFor="let contacto of contactos">
             <mat-icon mat-list-icon>account_circle</mat-icon>
-            <span mat-line>Pepito</span>
-            <span mat-line>+57 301 540 9087</span>
+            <span mat-line>{{contacto.nombre}}</span>
+            <span mat-line>{{formatearTelefono(contacto.celular)}}</span>
+            <span mat-line>{{formatearTelefono(contacto.telefonoFijo)}}</span>
+            <button type="button" mat-icon-button color="primary" matTooltip="Editar"
+              (click)="abrirModalContactos(contacto)">
+              <mat-icon>edit</mat-icon>
+            </button>
             <mat-divider></mat-divider>
           </mat-list-item>
           <mat-list-item>
-            <mat-icon mat-list-icon>account_circle</mat-icon>
-            <span mat-line>Fulanito</span>
-            <span mat-line>+57 301 540 9086</span>
-            <mat-divider></mat-divider>
-          </mat-list-item>
-          <mat-list-item>
-            <button mat-icon-button color="primary">
+            <button mat-icon-button color="primary" (click)="abrirModalContactos()">
               <mat-icon class="size-2">add_circle</mat-icon>
               <span class="pl-3">Agregar contacto</span>
             </button>

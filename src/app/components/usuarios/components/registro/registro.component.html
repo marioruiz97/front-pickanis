@@ -1,7 +1,7 @@
 <div>
   <h1 mat-dialog-title>Registro de usuarios</h1>
   <div fxFlex></div>
-  <button mat-icon-button [matDialogClose]="true">
+  <button mat-icon-button matDialogClose>
     <mat-icon>clear</mat-icon>
   </button>
 </div>
@@ -125,7 +125,7 @@
 
   <mat-dialog-actions>
     <div fxFlex></div>
-    <button mat-button [matDialogClose]="false">Cancelar</button>
+    <button mat-button matDialogClose>Cancelar</button>
     <button mat-button type="submit" color="accent" [disabled]="!registroForm.valid">Registrarse</button>
   </mat-dialog-actions>
 </form>

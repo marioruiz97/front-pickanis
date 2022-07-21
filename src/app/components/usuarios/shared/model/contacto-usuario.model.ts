@@ -3,3 +3,10 @@ export interface ContactoUsuario {
   telefonoFijo: string;
   direccion: string;
 }
+
+export interface ContactoEmergencia {
+  id: number;
+  nombre: string;
+  celular: string;
+  telefonoFijo: string;
+}

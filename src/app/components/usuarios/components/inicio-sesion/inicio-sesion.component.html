@@ -1,7 +1,7 @@
 <div>
   <h1 mat-dialog-title>Inicia sesion</h1>
   <div fxFlex></div>
-  <button mat-icon-button [matDialogClose]="true">
+  <button mat-icon-button matDialogClose>
     <mat-icon>clear</mat-icon>
   </button>
 </div>
@@ -59,7 +59,7 @@
 
   <mat-dialog-actions>
     <div fxFlex></div>
-    <button mat-button [matDialogClose]="false">Cancelar</button>
+    <button mat-button matDialogClose>Cancelar</button>
     <button mat-button type="submit" color="primary" [disabled]="!loginForm.valid">Iniciar Sesion</button>
   </mat-dialog-actions>
 

@@ -7,6 +7,7 @@ import { UiService } from '@core/service/ui.service';
 import { RegistroComponent } from '@feature/usuarios/components/registro/registro.component';
 import { lastValueFrom, Observable } from 'rxjs';
 import { AuthData } from '../model/auth-data.model';
+import { ContactoEmergencia } from '../model/contacto-usuario.model';
 import { InformacionPersonal, Perfil } from '../model/perfil-data.model';
 import { RegistroUsuario } from '../model/registro-usuario.model';
 
@@ -41,6 +42,21 @@ export class UsuarioService {
         this.uiService.mostrarError({ title: "Error actualizando informacion personal", message: "Intenta nuevamente", confirm: "Ok", showCancel: false });
       }
     })
+  }
+
+  cargarMisContactosEmergencia(): Observable<ContactoEmergencia[]> {
+    const path = `${this.pathMiCuenta}/contactos`;
+    return this.httpService.getRequest(path);
+  }
+
+  editarContactoEmergencia(contacto: ContactoEmergencia): Observable<ContactoEmergencia> {
+    const path = `${this.pathMiCuenta}/contactos/${contacto.id}`;
+    return this.httpService.putRequest<ContactoEmergencia, ContactoEmergencia>(path, contacto);
+  }
+
+  agregarContactoEmergencia(contacto: ContactoEmergencia): Observable<ContactoEmergencia> {
+    const path = `${this.pathMiCuenta}/contactos`;
+    return this.httpService.postRequest<ContactoEmergencia, ContactoEmergencia>(path, contacto);
   }
 
   async registrar(usuario: RegistroUsuario, seleccionPaseador: boolean, ref: MatDialogRef<RegistroComponent>) {
