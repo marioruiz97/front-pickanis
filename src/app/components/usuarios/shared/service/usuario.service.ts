@@ -44,6 +44,11 @@ export class UsuarioService {
     })
   }
 
+  cambiarContrasena(form: any, identificacion: string): Observable<Respuesta> {
+    const path = `${this.pathMiCuenta}/${identificacion}/cambiar-contrasena`;
+    return this.httpService.putRequest(path, form);
+  }
+
   cargarMisContactosEmergencia(): Observable<ContactoEmergencia[]> {
     const path = `${this.pathMiCuenta}/contactos`;
     return this.httpService.getRequest(path);
@@ -86,5 +91,19 @@ export class UsuarioService {
     }).catch(err => {
       this.authService.inicioSesionFallo(err.error);
     });
+  }
+
+  desactivarCuenta(identificacion: string) {
+    const path = `${this.pathMiCuenta}/${identificacion}`;
+    this.httpService.deleteRequest<Respuesta>(path).subscribe({
+      next: (respuesta: Respuesta) => {
+        this.authService.cerrarSesion();
+        this.uiService.mostrarSnackBar(respuesta.mensaje);
+      },
+      error: (err) => {
+        console.log(err)
+        this.uiService.mostrarError({ title: "Hubo un error desactivando el usuario", message: "No se pudo desactivar el usuario", showCancel: false });
+      }
+    })
   }
 }

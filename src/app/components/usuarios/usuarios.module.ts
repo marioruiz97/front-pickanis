@@ -8,6 +8,7 @@ import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ContactoEmergenciaComponent } from './components/contacto-emergencia/contacto-emergencia.component';
+import { CambiarContrasenaComponent } from './components/cambiar-contrasena/cambiar-contrasena.component';
 
 
 
@@ -16,7 +17,8 @@ import { ContactoEmergenciaComponent } from './components/contacto-emergencia/co
     RegistroComponent,
     InicioSesionComponent,
     MiPerfilComponent,
-    ContactoEmergenciaComponent
+    ContactoEmergenciaComponent,
+    CambiarContrasenaComponent
   ],
   imports: [
     CommonModule,

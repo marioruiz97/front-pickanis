@@ -9,6 +9,7 @@ import { InformacionPersonal, Perfil } from '@feature/usuarios/shared/model/perf
 import { obtenerIdTipoDocumento, obtenerTipoDocumento } from '@feature/usuarios/shared/model/tipo-documento.model';
 import { DIALOG_CONFIG } from '@shared/app.constants';
 import { UsuarioService } from '../../shared/service/usuario.service';
+import { CambiarContrasenaComponent } from '../cambiar-contrasena/cambiar-contrasena.component';
 import { ContactoEmergenciaComponent } from '../contacto-emergencia/contacto-emergencia.component';
 
 
@@ -56,7 +57,7 @@ export class MiPerfilComponent implements OnInit {
   }
 
   formatearTelefono(telefono: string) {
-    return "+57 " + telefono.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3");
+    return telefono ? "+57 " + telefono.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3") : "";
   }
 
   cargarInformacionPersonal() {
@@ -166,21 +167,24 @@ export class MiPerfilComponent implements OnInit {
   }
 
   abrirModalContrasena() {
-    /* no code this.matDialog.open(ChangePasswordComponent, { data: { identificacion: this.identificacion } }); */
+    this.matDialog.open(CambiarContrasenaComponent, { data: { identificacion: this.identificacion } });
   }
 
   verificarCuenta() {
     alert('se enviará un correo electrónico para verificar la cuenta')
   }
 
-  eliminarCuenta() {
+  desactivarCuenta() {
     const data = {
-      title: "Eliminar la cuenta",
-      message: `¿Estás seguro de eliminar tu cuenta? <br/> <span class='caption itallic'>Esto no se puede deshacer</span>`,
+      title: "Desactivar la cuenta",
+      message: `¿Estás seguro de desactivar tu cuenta? <br/> <span class='caption itallic'>Esto no se puede deshacer</span>`,
       errors: [],
-      confirm: "Sí, deseo eliminar la cuenta",
+      confirm: "Sí, deseo desactivar la cuenta",
+      showCancel: true
     }
-    this.matDialog.open(ConfirmDialogComponent, { ...DIALOG_CONFIG, data });
+    this.matDialog.open(ConfirmDialogComponent, { ...DIALOG_CONFIG, data }).afterClosed().subscribe(desactivado => {
+      if (desactivado) this.service.desactivarCuenta(this.identificacion);
+    });
   }
 
 }

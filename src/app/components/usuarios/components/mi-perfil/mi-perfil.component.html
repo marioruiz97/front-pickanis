@@ -102,7 +102,7 @@
             <mat-icon mat-list-icon>account_circle</mat-icon>
             <span mat-line>{{contacto.nombre}}</span>
             <span mat-line>{{formatearTelefono(contacto.celular)}}</span>
-            <span mat-line>{{formatearTelefono(contacto.telefonoFijo)}}</span>
+            <span mat-line *ngIf="contacto.telefonoFijo">{{formatearTelefono(contacto.telefonoFijo)}}</span>
             <button type="button" mat-icon-button color="primary" matTooltip="Editar"
               (click)="abrirModalContactos(contacto)">
               <mat-icon>edit</mat-icon>
@@ -143,9 +143,9 @@
             </button>
           </mat-list-item>
           <mat-list-item>
-            <button mat-button (click)="eliminarCuenta()" color="warn">
+            <button mat-button (click)="desactivarCuenta()" color="warn">
               <mat-icon>person_remove</mat-icon>
-              <span class="pl-2">Eliminar cuenta</span>
+              <span class="pl-2">Desactivar cuenta</span>
             </button>
           </mat-list-item>
         </mat-list>
