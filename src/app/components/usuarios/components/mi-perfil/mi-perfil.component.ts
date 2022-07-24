@@ -151,18 +151,35 @@ export class MiPerfilComponent implements OnInit {
   abrirModalContactos(data?: ContactoEmergencia | undefined) {
     this.matDialog.open(ContactoEmergenciaComponent, { data }).afterClosed().subscribe({
       next: (respuesta => {
-        console.log(respuesta)
-        if (this.contactos.length === 0) { this.contactos.push(respuesta); }
-        else {
-          this.contactos = this.contactos.map(contacto => {
-            if (contacto.id === respuesta.id) {
-              contacto = respuesta;
-            }
-            return contacto;
-          });
+        if (respuesta) {
+          if (this.contactos.length === 0) { this.contactos.push(respuesta); }
+          else {
+            this.contactos = this.contactos.map(contacto => {
+              if (contacto.id === respuesta.id) {
+                contacto = respuesta;
+              }
+              return contacto;
+            });
+          }
+          if (this.contactos.indexOf(respuesta) === -1) { this.contactos.push(respuesta); }
         }
-        if (respuesta && this.contactos.indexOf(respuesta) === -1) { this.contactos.push(respuesta); }
       })
+    });
+  }
+
+  eliminarContactoEmergencia(contacto: ContactoEmergencia) {
+    this.uiService.mostrarConfirmDialog({
+      title: "Eliminar contacto", message: "¿Realmente deseas eliminar este contacto?  <span class='caption itallic'>Esto no se puede deshacer</span>",
+      showCancel: true, confirm: "Sí, Eliminar"
+    }).afterClosed().subscribe({
+      next: (decision: boolean) => {
+        if (decision) {
+          this.service.eliminarContactoEmergencia(contacto).then(respuesta => {
+            this.uiService.mostrarSnackBar(respuesta.mensaje);
+            this.cargarMisContactosEmergencia();
+          }).catch(err => this.uiService.mostrarError({ title: "Error", message: "Ha ocurrido un error eliminando el contacto, intenta más tarde", showCancel: false }))
+        }
+      }
     });
   }
 

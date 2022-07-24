@@ -64,6 +64,12 @@ export class UsuarioService {
     return this.httpService.postRequest<ContactoEmergencia, ContactoEmergencia>(path, contacto);
   }
 
+  async eliminarContactoEmergencia(contacto: ContactoEmergencia): Promise<Respuesta> {
+    console.log("contacto a eliminar", contacto.id)
+    const path = `${this.pathMiCuenta}/contactos/${contacto.id}`;
+    return lastValueFrom(this.httpService.deleteRequest<Respuesta>(path));
+  }
+
   async registrar(usuario: RegistroUsuario, seleccionPaseador: boolean, ref: MatDialogRef<RegistroComponent>) {
     const tipoRegistro = seleccionPaseador ? "paseador" : "usuario";
     await lastValueFrom(this.httpService.postRequest<RegistroUsuario, Respuesta>(`${this.urlRegistro}${tipoRegistro}`, usuario)).then(respuesta => {
@@ -101,7 +107,6 @@ export class UsuarioService {
         this.uiService.mostrarSnackBar(respuesta.mensaje);
       },
       error: (err) => {
-        console.log(err)
         this.uiService.mostrarError({ title: "Hubo un error desactivando el usuario", message: "No se pudo desactivar el usuario", showCancel: false });
       }
     })
