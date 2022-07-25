@@ -1,6 +1,5 @@
 <div class="row">
-  <!-- mat-dialog-title -->
-  <h3>Registro Mascota</h3>
+  <h3>{{esEditar ? 'Modificar' : 'Registrar'}} Mascota</h3>
   <div fxFlex></div>
   <button mat-icon-button matTooltip="Cerrar" matDialogClose>
     <mat-icon>clear</mat-icon>
@@ -71,12 +70,11 @@
 
   <mat-dialog-actions class="form-actions" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-evenly"
     fxLayoutGap="20x">
-    <button type="button" mat-raised-button matDialogClose color="warn" *ngIf="!isWaiting">
+    <button type="button" mat-raised-button matDialogClose color="warn">
       Cancelar
     </button>
-    <button type="submit" mat-raised-button color="primary" *ngIf="!isWaiting" [disabled]="mascotaForm.invalid">
+    <button type="submit" mat-raised-button color="primary" [disabled]="mascotaForm.invalid">
       Guardar mascota
     </button>
-    <mat-spinner *ngIf="isWaiting"></mat-spinner>
   </mat-dialog-actions>
 </form>

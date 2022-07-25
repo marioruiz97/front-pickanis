@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Mascota } from '@feature/mascota/shared/model/mascota';
 import { sexosMascota, SexoMascota } from '@feature/mascota/shared/model/sexo-mascota';
+import { AutenticacionService } from '@core/service/autenticacion.service';
 
 @Component({
   templateUrl: './guardar-mascota.component.html',
@@ -13,31 +14,33 @@ import { sexosMascota, SexoMascota } from '@feature/mascota/shared/model/sexo-ma
 export class GuardarMascotaComponent implements OnInit {
 
   mascotaForm!: FormGroup;
-  maxDate = new Date();
-  isWaiting = false;
+  maxDate = new Date('06/01/2022');
   sexos: SexoMascota[] = sexosMascota;
-  private isUpdate = false;
-  private dueno!: number;
+  private _esEditar = false;
+  private dueno!: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Mascota,
     public dialogRef: MatDialogRef<GuardarMascotaComponent>,
     private service: MascotaService,
-    private uiService: UiService
+    private uiService: UiService,
+    private authService: AutenticacionService
   ) { }
 
-  // TODO: obtener id responsable desde el authService
+  get esEditar() {
+    return this._esEditar;
+  }
+
   ngOnInit(): void {
     this.iniciarFormulario();
-    /* if (this.data.idResponsableMascota) {
-      this.idResponsable = this.data.idResponsableMascota;
-    } else if (this.data.responsableMascota) {
-      this.idResponsable = this.data.responsableMascota?.idResponsable;
-    } */
+    if (this.data && this.data.dueno) {
+      this.dueno = this.data.dueno;
+    } else if (this.authService.usuarioEnSesion) {
+      this.dueno = this.authService.usuarioEnSesion.identificacion;
+    }
     if (this.data && this.data.idMascota) {
       this.setForm(this.data);
     }
-    this.uiService.loadingState.subscribe(state => this.isWaiting = state);
   }
 
   private iniciarFormulario(): void {
@@ -54,7 +57,7 @@ export class GuardarMascotaComponent implements OnInit {
   }
 
   private setForm(mascota: Mascota): void {
-    this.isUpdate = true;
+    this._esEditar = true;
     this.mascotaForm.setValue({
       idMascota: mascota.idMascota,
       nombre: mascota.nombre,
@@ -67,12 +70,32 @@ export class GuardarMascotaComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.isUpdate) {
-      this.service.modificar({ ...this.mascotaForm.value, dueno: this.dueno }, this.data.idMascota);
+    if (this._esEditar) {
+      this.service.modificar({ ...this.mascotaForm.value, dueno: this.dueno, idMascota: this.data.idMascota }, this.data.dueno)
+        .subscribe({
+          next: (respuesta) => this.resolverPeticion(respuesta),
+          error: (err) => {
+            console.log("Error editando una mascota: ", err)
+            this.uiService.mostrarConfirmDialog({ title: "Error", message: "No se pudo guardar la mascota, intenta más tarde", showCancel: false });
+          }
+        });
     } else {
-      this.service.crear({ ...this.mascotaForm.value, dueno: this.dueno });
+      this.service.crear({ ...this.mascotaForm.value, dueno: this.dueno })
+        .subscribe({
+          next: (respuesta) => this.resolverPeticion(respuesta),
+          error: (err) => {
+            console.log("Error creando una mascota: ", err)
+            this.uiService.mostrarConfirmDialog({ title: "Error", message: "No se pudo guardar la mascota, intenta más tarde", showCancel: false });
+          }
+        });
     }
-    this.dialogRef.close();
+  }
+
+  private resolverPeticion(respuesta: Mascota) {
+    if (respuesta && respuesta.idMascota) {
+      this.uiService.mostrarSnackBar("Se ha guardado la mascota con éxito");
+      this.dialogRef.close(true);
+    }
   }
 
 }

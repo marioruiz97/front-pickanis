@@ -23,14 +23,16 @@ export class ListarMascotaComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private service: MascotaService, private matDialog: MatDialog) {
-    this.datasource.data.push({
-      idMascota: 1, dueno: 1, fechaNacimiento: new Date(), nombre: "nala", observaciones: "loca", peso: 34, raza: "golden retriever", sexo: "F"
-    })
+    this.cargarMisMascotas();
   }
 
   ngAfterViewInit(): void {
     this.datasource.sort = this.sort;
     this.datasource.paginator = this.paginator;
+  }
+
+  private cargarMisMascotas() {
+    this.service.consultar().subscribe(respuesta => this.datasource.data = respuesta);
   }
 
   doFilter($event: any): void {
@@ -39,11 +41,16 @@ export class ListarMascotaComponent implements AfterViewInit, OnDestroy {
   }
 
   crearMascota(): void {
-    this.matDialog.open(GuardarMascotaComponent, { ...DIALOG_CONFIG });
+    this.matDialog.open(GuardarMascotaComponent, { ...DIALOG_CONFIG }).afterClosed().subscribe(respuesta => { if (respuesta) this.cargarMisMascotas() });
   }
 
   editarMascota(mascota: Mascota): void {
-    this.matDialog.open(GuardarMascotaComponent, { ...DIALOG_CONFIG, data: { ...mascota } });
+    this.matDialog.open(GuardarMascotaComponent, { ...DIALOG_CONFIG, data: { ...mascota } }).afterClosed().subscribe(respuesta => { if (respuesta) this.cargarMisMascotas() });
+  }
+
+  eliminarMascota(mascota: Mascota): void {
+    this.service.eliminarMascota(mascota);
+    this.cargarMisMascotas();
   }
 
   ngOnDestroy(): void {
