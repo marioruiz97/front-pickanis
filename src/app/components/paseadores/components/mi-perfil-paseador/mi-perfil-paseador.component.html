@@ -1,35 +1,25 @@
 <mat-card class="mat-elevation-z5 m-2">
   <mat-card-header>
     <mat-card-title>Mi perfil paseador</mat-card-title>
-    <!-- <span fxFlex></span>
-    <button mat-button color="primary" *ngIf="esPaseador" matTooltip="Editar perfil paseador" (click)="toggleEditar()">
-      <mat-icon>edit</mat-icon>
-    </button> -->
   </mat-card-header>
   <mat-card-content>
     <mat-list>
-      <mat-list-item>
-        <button mat-button>
-          <mat-icon>dashboard</mat-icon>
-          <span class="pl-2">Ir a mi tablero</span>
+      <mat-list-item *ngIf="esPaseador">
+        <button mat-button (click)="abrirFormularioPaseador()">
+          <mat-icon>edit</mat-icon>
+          <span class="pl-2">Editar mi perfil</span>
         </button>
       </mat-list-item>
-      <mat-list-item>
-        <button mat-button (click)="cambiar()">
+      <mat-list-item *ngIf="!esPaseador">
+        <button mat-button (click)="abrirFormularioPaseador()">
           <mat-icon>verified_user</mat-icon>
-          <span class="pl-2">Verificar cuenta</span>
+          <span class="pl-2">Registrarme como paseador</span>
         </button>
       </mat-list-item>
-      <mat-list-item>
-        <button mat-button (click)="cambiar()" color="warn">
-          <mat-icon>lock_reset</mat-icon>
-          <span class="pl-2">Cambiar contraseña</span>
-        </button>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-button (click)="cambiar()" color="warn">
+      <mat-list-item *ngIf="esPaseador">
+        <button mat-button (click)="desactivarPaseador()">
           <mat-icon>person_remove</mat-icon>
-          <span class="pl-2">Desactivar cuenta</span>
+          <span class="pl-2">Desactivarme como paseador</span>
         </button>
       </mat-list-item>
     </mat-list>

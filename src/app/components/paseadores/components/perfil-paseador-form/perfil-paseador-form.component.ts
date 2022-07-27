@@ -1,48 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PerfilPaseador } from '@feature/paseadores/shared/model/paseador';
+import { PaseadorService } from '@feature/paseadores/shared/service/paseador.service';
 
 @Component({
-  selector: 'app-perfil-paseador-form',
   templateUrl: './perfil-paseador-form.component.html',
   styleUrls: ['./perfil-paseador-form.component.css']
 })
 export class PerfilPaseadorFormComponent implements OnInit {
 
-  habilitarCampos: boolean = false;
+  esRegistrar = true;
   paseadorForm: FormGroup;
 
-  constructor() {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: { esPaseador: boolean },
+    private matDialogRef: MatDialogRef<PerfilPaseadorFormComponent>,
+    private service: PaseadorService
+  ) {
     this.paseadorForm = this.iniciarFormulario();
+    this.esRegistrar = !data.esPaseador;
   }
 
   ngOnInit(): void {
-    console.log("ignorar")
+    if (this.data.esPaseador) this.obtenerPerfilActual();
+  }
+
+  obtenerPerfilActual() {
+    this.service.obtenerMiPerfilPaseador().then(respuesta => this.setFormulario(respuesta));
   }
 
   private iniciarFormulario() {
-    return new FormGroup({});
+    return new FormGroup({
+      tiempoExperiencia: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      perfil: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+    });
+  }
+
+  private setFormulario(paseador: PerfilPaseador): void {
+    this.paseadorForm.setValue({
+      tiempoExperiencia: paseador.tiempoExperiencia,
+      perfil: paseador.perfilExperiencia,
+    })
   }
 
   guardarPerfilPaseador() {
-
-  }
-
-  toggleEditar() {
-    this.habilitarCampos = !this.habilitarCampos;
-    if (this.habilitarCampos) {
-      this.habilitarCamposFormulario();
+    if (this.esRegistrar) {
+      this.service.registrarPaseador({ ...this.paseadorForm.value }).subscribe({
+        next: respuesta => this.matDialogRef.close(respuesta),
+        error: _ => this.matDialogRef.close({ exito: false, mensaje: "Falló el registrar paseador, intenta nuevamente" })
+      });
     } else {
-      this.deshabilitarCamposFormulario();
+      this.service.editarPaseador({ ...this.paseadorForm.value }).subscribe({
+        next: respuesta => this.matDialogRef.close(respuesta),
+        error: _ => this.matDialogRef.close({ exito: false, mensaje: "Falló el editar el perfil de paseador, intenta nuevamente" })
+      });
     }
   }
 
-  private habilitarCamposFormulario() {
-    const controls = ['nombre', 'apellido', 'direccion', 'telefonoFijo', 'celular', 'correo'];
-    controls.forEach(control => this.paseadorForm.controls[control].enable());
-  }
-
-  private deshabilitarCamposFormulario() {
-    const controls = ['nombre', 'apellido', 'direccion', 'telefonoFijo', 'celular', 'correo'];
-    controls.forEach(control => this.paseadorForm.controls[control].disable());
-  }
 }
