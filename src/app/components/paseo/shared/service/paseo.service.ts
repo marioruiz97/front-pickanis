@@ -4,6 +4,7 @@ import { UiService } from '@core/service/ui.service';
 import { HttpService } from '@core/service/http.service';
 import { Injectable } from '@angular/core';
 import * as rutas from '@shared/rutas.constants'
+import { MatTableDataSource } from '@angular/material/table';
 
 @Injectable()
 export class PaseoService {
@@ -11,6 +12,7 @@ export class PaseoService {
   private consultaPath = 'consulta/' + rutas.RUTA_PASEOS;
 
   public debeRecargarse = new Subject<boolean>();
+  datasource = new MatTableDataSource<Paseo>();
 
   constructor(private httpService: HttpService, private uiService: UiService) { }
 
@@ -38,14 +40,21 @@ export class PaseoService {
       });
   }
 
-  modificar(data: Paseo, idResponsable: number): void {
+  modificar(paseo: Paseo): void {
+
+    const filtro =this.datasource.data.map((p)=>p.idPaseo===paseo.idPaseo);
+    //`${this.datasource.data}`, data);
+    console.log(filtro)
+
+
+  //  this.datasource.data
     //this.uiService.configurarSnackBar()
-    this.httpService.putRequest(`${this.comandoPath}/${idResponsable}`, data)
+  /*  this.httpService.putRequest(`${this.comandoPath}/${idResponsable}`, data)
       .subscribe((exito) => {
         if (exito) {
           this.debeRecargarse.next(true);
         }
-      });
+      });*/
   }
 
 

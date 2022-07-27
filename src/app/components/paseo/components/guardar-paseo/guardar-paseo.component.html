@@ -14,22 +14,22 @@
       <input matInput formControlName="idPaseo" />
     </mat-form-field>
 
-    <mat-form-field fxHide>
-      <mat-label>Código Interesado</mat-label>
+    <mat-form-field class="form-input">
+      <mat-label>Cedula del Interesado</mat-label>
       <input matInput formControlName="idPublicador" />
     </mat-form-field>
 
-    <mat-form-field fxHide>
-      <mat-label>Código Mascota</mat-label>
+    <mat-form-field class="form-input">
+      <mat-label>Nombre de la Mascota</mat-label>
       <input matInput formControlName="idMascota" />
     </mat-form-field>
 
     <div class="form-group" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="1em">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Fecha de Publicación del Paseo</mat-label>
-        <input matInput [max]="maxDate" [matDatepicker]="nacimiento" formControlName="fechaPublicacion" />
-        <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
-        <mat-datepicker #nacimiento></mat-datepicker>
+        <input matInput [matDatepicker]="datePublicidad" formControlName="fechaPublicacion" />
+        <mat-datepicker-toggle matSuffix [for]="datePublicidad"></mat-datepicker-toggle>
+        <mat-datepicker #datePublicidad></mat-datepicker>
         <mat-hint>Ingresa la Fecha de Publicación del Paseo</mat-hint>
         <mat-error>La Fecha de Publicación del Paseo es un campo obligatorio</mat-error>
       </mat-form-field>
@@ -38,9 +38,9 @@
     <div class="form-group" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="1em">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Fecha de Inicial del Paseo</mat-label>
-        <input matInput [max]="maxDate" [matDatepicker]="nacimiento" formControlName="fechaInicio" />
-        <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
-        <mat-datepicker #nacimiento></mat-datepicker>
+        <input matInput [matDatepicker]="datePaseo" formControlName="fechaInicio" />
+        <mat-datepicker-toggle matSuffix [for]="datePaseo"></mat-datepicker-toggle>
+        <mat-datepicker #datePaseo></mat-datepicker>
         <mat-hint>Ingresa la Fecha de Inicial del Paseo</mat-hint>
         <mat-error>La Fecha de Inicial del Paseo es un campo obligatorio</mat-error>
       </mat-form-field>
@@ -49,9 +49,9 @@
     <div class="form-group" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="1em">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Fecha de Final del Paseo</mat-label>
-        <input matInput [max]="maxDate" [matDatepicker]="nacimiento" formControlName="fechaFinal" />
-        <mat-datepicker-toggle matSuffix [for]="nacimiento"></mat-datepicker-toggle>
-        <mat-datepicker #nacimiento></mat-datepicker>
+        <input matInput [matDatepicker]="dateEndPaseo" formControlName="fechaFinal" />
+        <mat-datepicker-toggle matSuffix [for]="dateEndPaseo"></mat-datepicker-toggle>
+        <mat-datepicker #dateEndPaseo></mat-datepicker>
         <mat-hint>Ingresa la Fecha de Final del Paseo</mat-hint>
         <mat-error>La Fecha de Final del Paseo es un campo obligatorio</mat-error>
       </mat-form-field>
@@ -64,7 +64,7 @@
         <mat-icon matPrefix>message</mat-icon>
         <mat-hint>
           <p>Ingrese los detalles del paseo</p>
-          <p> Máximo 255 caracteres / actual:{{ paseoForm.value.observaciones.length }} </p>
+          <p> Máximo 255 caracteres / actual:{{ paseoForm.value.descripcion.length }} </p>
         </mat-hint>
       </mat-form-field>
     </div>

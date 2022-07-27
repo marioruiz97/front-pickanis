@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  endpoint: 'http://localhost:8090/api/v1',
+  endpoint: 'http://localhost:8080/api/v1',
   production: false,
   authorization: 'Basic ' + btoa('front-pickanis:12345'),
   token_path: 'oauth/token',
