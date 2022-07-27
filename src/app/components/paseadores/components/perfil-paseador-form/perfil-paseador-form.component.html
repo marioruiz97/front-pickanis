@@ -1,0 +1,23 @@
+<form [formGroup]="paseadorForm" (ngSubmit)="guardarPerfilPaseador()" fxLayout="column" *ngIf="esPaseador">
+  <mat-form-field appearance="standard" class="form-input">
+    <mat-label>Tiempo de experiencia paseando perros</mat-label>
+    <input matInput type="text" placeholder="Ej. 360 dias" formControlName="tiempoExperiencia">
+    <mat-hint>Ingrese la experiencia</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="form-input" appearance="standard">
+    <mat-label>Crea tu perfil como paseador</mat-label>
+    <textarea matInput placeholder="Tu perfil, experiencia y descripcion" formControlName="perfil"></textarea>
+    <mat-hint>Usa tu perfil para describirte un poco como paseador</mat-hint>
+  </mat-form-field>
+
+  <p class="caption itallic text-center my-3 text-red" *ngIf="habilitarCampos && !paseadorForm.valid">
+    Verifica los campos del formulario
+  </p>
+
+  <div *ngIf="habilitarCampos" fxLayoutAlign.gt-sm="end">
+    <button type="button" mat-raised-button color="warn" (click)="toggleEditar()"> Cancelar </button>
+    <button type="submit" mat-raised-button color="primary" class="ml-5" [disabled]="!paseadorForm.valid">
+      Guardar cambios
+    </button>
+  </div>
+</form>
