@@ -11,3 +11,8 @@ mat-dialog-content {
   min-height: 50vh;
   max-height: 80vh;
 }
+
+.form-input {
+  margin: 1rem;
+  width:100%;
+}

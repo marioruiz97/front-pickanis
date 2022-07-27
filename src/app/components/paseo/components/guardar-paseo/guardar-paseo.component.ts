@@ -67,11 +67,10 @@ export class GuardarPaseoComponent implements OnInit {
 
   onSubmit(): void {
     if (this.isUpdate) {
-      this.service.modificar({ ...this.paseoForm.value, publicador: this.publicador }, this.data.idPaseo);
+      this.dialogRef.close({ ...this.paseoForm.value,idPaseo:this.data.idPaseo});
     } else {
-      this.service.crear({ ...this.paseoForm.value, publicador: this.publicador });
+      this.dialogRef.close({ ...this.paseoForm.value});
     }
-    this.dialogRef.close();
   }
 
 }

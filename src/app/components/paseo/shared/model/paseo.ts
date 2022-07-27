@@ -1,7 +1,7 @@
 export interface Paseo {
   idPaseo: number;
   idPublicador : number;
-  idMascota: number;
+  idMascota: string;
   fechaPublicacion: Date;
   fechaInicio: Date;
   fechaFinal: Date;

@@ -23,9 +23,12 @@ export class ListarPaseoComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
   constructor(private service: PaseoService, private matDialog: MatDialog) {
-    this.datasource.data.push({
-      idPaseo: 1, idPublicador: 1, idMascota: 1, fechaPublicacion: new Date(), fechaInicio: new Date(), fechaFinal: new Date(), estado: true, descripcion: 'Paseo completo', tipo: ' '
-    })
+    this.datasource.data.push(
+      {idPaseo: 1, idPublicador: 103598856201, idMascota: "Firulais", fechaPublicacion: new Date(), fechaInicio: new Date(), fechaFinal: new Date(), estado: true, descripcion: 'Solo se necesita sacar 1 hora', tipo: ' '},
+      {idPaseo: 2, idPublicador: 436885921, idMascota: "Lupita", fechaPublicacion: new Date('07-25-2022'), fechaInicio: new Date('07-28-2022'), fechaFinal: new Date('07-28-2022'), estado: true, descripcion: 'Solo sale si tienes puesto una camisa amarilla', tipo: ' '},
+      {idPaseo: 3, idPublicador: 11526984501, idMascota: "Mia", fechaPublicacion: new Date('07-23-2022'), fechaInicio: new Date('07-29-2022'), fechaFinal: new Date('07-29-2022'), estado: true, descripcion: 'Le gusta jugar con mas perros', tipo: ' '},
+      {idPaseo: 4, idPublicador: 116982035, idMascota: "Zafira", fechaPublicacion: new Date('07-26-2022'), fechaInicio: new Date('08-01-2022'), fechaFinal: new Date('08-01-2022'), estado: true, descripcion: 'Camina lento', tipo: ' '}
+      )
   }
 
   ngAfterViewInit(): void {
@@ -39,11 +42,21 @@ export class ListarPaseoComponent implements AfterViewInit, OnDestroy {
   }
 
   crearPaseo(): void {
-    this.matDialog.open(GuardarPaseoComponent, { ...DIALOG_CONFIG });
+    this.matDialog.open(GuardarPaseoComponent, { ...DIALOG_CONFIG }).afterClosed().subscribe(respuesta=>{this.modificarLista(respuesta)});
   }
 
   editarPaseo(paseo: Paseo): void {
-    this.matDialog.open(GuardarPaseoComponent, { ...DIALOG_CONFIG, data: { ...paseo } });
+    this.matDialog.open(GuardarPaseoComponent, { ...DIALOG_CONFIG, data: { ...paseo } }).afterClosed().subscribe(respuesta=>{this.modificarLista(respuesta)});
+  }
+  modificarLista(paseo: Paseo):void{
+    if(paseo && paseo.idMascota){
+      if (paseo.idPaseo) {
+
+      }else{
+        const idPaseo=this.datasource.data.length
+        this.datasource.data.push({...paseo,idPaseo})
+      }
+    }
   }
 
   ngOnDestroy(): void {
