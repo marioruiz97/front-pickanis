@@ -23,7 +23,7 @@ export class FooterComponent {
   recursos: EnlaceExterno[] = [
     { nombre: "Mi cuenta", faIcon: faUser, url: `/${rutas.RUTA_CUENTA}`, target: "_self" },
     { nombre: "Mis mascotas", faIcon: faPaw, url: `/${rutas.RUTA_MASCOTAS}`, target: "_self" },
-    { nombre: "Mi tablero", faIcon: faBorderAll, url: `/${rutas.RUTA_DASHBOARD}`, target: "_self" },
+    /* { nombre: "Mi tablero", faIcon: faBorderAll, url: `/${rutas.RUTA_DASHBOARD}`, target: "_self" }, */
     { nombre: "Paseadores", faIcon: faHiking, url: `/${rutas.RUTA_PASEADORES}`, target: "_self" },
     { nombre: "Paseos", faIcon: faHiking, url: `/${rutas.RUTA_PASEOS}`, target: "_self" },
   ];

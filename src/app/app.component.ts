@@ -18,7 +18,7 @@ export class AppComponent {
   menu: NavItem[] = [
     { url: '/paseadores', name: 'Paseadores', icon: 'hiking' },
     { url: '/paseos', name: 'Paseos', icon: 'explore' },
-    { url: '/dashboard', name: 'Mi tablero', icon: 'dashboard' },
+    /* { url: '/dashboard', name: 'Mi tablero', icon: 'dashboard' }, */
     { url: '/mascotas', name: 'Mis mascotas', icon: 'pets' },
   ];
 

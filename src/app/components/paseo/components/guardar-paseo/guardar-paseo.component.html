@@ -27,7 +27,8 @@
     <div class="form-group" fxLayout.lt-sm="column" fxLayoutGap.gt-xs="1em">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Fecha de Publicación del Paseo</mat-label>
-        <input matInput [matDatepicker]="datePublicidad" formControlName="fechaPublicacion" />
+        <input matInput [max]="maxDate" [value]="maxDate" [matDatepicker]="datePublicidad"
+          formControlName="fechaPublicacion" />
         <mat-datepicker-toggle matSuffix [for]="datePublicidad"></mat-datepicker-toggle>
         <mat-datepicker #datePublicidad></mat-datepicker>
         <mat-hint>Ingresa la Fecha de Publicación del Paseo</mat-hint>
