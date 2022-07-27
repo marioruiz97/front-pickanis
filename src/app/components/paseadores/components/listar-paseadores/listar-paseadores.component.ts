@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PaseadorService } from '@feature/paseadores/shared/service/paseador.service';
 import { Paseador } from '../../shared/model/paseador';
 
 @Component({
@@ -6,16 +7,19 @@ import { Paseador } from '../../shared/model/paseador';
   templateUrl: './listar-paseadores.component.html',
   styleUrls: ['./listar-paseadores.component.css']
 })
-export class ListarPaseadoresComponent {
+export class ListarPaseadoresComponent implements OnInit {
 
-  paseadores: Paseador[] = [
-    { nombre: 'Fulanito Perez' },
-    { nombre: 'Fulanito Sultano' },
-    { nombre: 'Fulanito de tal' },
-    { nombre: 'Fulanito 4' },
-    { nombre: 'Fulanito 5' },
-  ]
-  constructor() { }
+  paseadores: Paseador[] = [];
+
+  constructor(private service: PaseadorService) { }
+
+  ngOnInit(): void {
+    this.cargarPaseadores();
+  }
+
+  private cargarPaseadores() {
+    this.service.cargarPaseadores().subscribe(lista => this.paseadores = lista);
+  }
 
 
 }

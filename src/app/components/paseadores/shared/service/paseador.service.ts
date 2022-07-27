@@ -3,7 +3,7 @@ import { Respuesta } from '@core/model/respuesta.model';
 import { HttpService } from '@core/service/http.service';
 import { RUTA_PASEADORES } from '@shared/rutas.constants';
 import { lastValueFrom, Observable } from 'rxjs';
-import { PerfilPaseador } from '../model/paseador';
+import { Paseador, PerfilPaseador } from '../model/paseador';
 
 @Injectable()
 export class PaseadorService {
@@ -11,6 +11,10 @@ export class PaseadorService {
   private paseadorPath = RUTA_PASEADORES;
 
   constructor(private httpService: HttpService) { }
+
+  cargarPaseadores(): Observable<Paseador[]> {
+    return this.httpService.getRequest<Paseador[]>(this.paseadorPath);
+  }
 
   esPaseador(): Promise<boolean> {
     const path = `${this.paseadorPath}/es-paseador`;

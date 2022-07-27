@@ -7,7 +7,9 @@ h3 {
 }
 
 .avatar {
-  background-color: #0000b9;
+  background-image: url('../../../../../assets/img/user.png');
+  background-position: center;
+  background-size: contain;
   height: 8vw;
   width: 8vw;
 }
